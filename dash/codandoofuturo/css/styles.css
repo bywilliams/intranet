@@ -1,0 +1,144 @@
+*{
+    font-family: 'Montserrat', sans-serif;
+    /* Os elementos abaixo são para zerar os parametros de espaçamento que são aplicados automáticamente pelos navegadores */
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html{
+    /* min-height: vai deixar o corpo do site com o tamanho da tela do usuário */
+    min-height: 100vh;
+    /* deixando os elementos com position relative pois o nosso footer tera um posicionamento absolute */
+    position: relative;
+}
+
+/* onde ira fica todo o conteúdo do site */
+main{
+    /* aqui o margin bottom será em relação ao footer */
+    margin-bottom: 250px;
+}
+
+
+/* NAVBAR */
+#logo {
+    position:absolute;
+    top: 10px;
+    left: 9.5%;
+}
+
+#logo img{
+    width: 50px;
+}
+
+#navbar {
+    display: flex;
+    /* alinha na vertical */
+    align-items: center;
+    /* alinhando na horizontal */
+    justify-content: center;
+    background-color: #161616;
+    padding: 20px;
+    text-transform: uppercase;
+    list-style: none;
+}
+
+#navbar li{
+    margin: 0 10px;
+    padding: 5px;
+}
+
+#navbar .nav_link{
+    color: #fff;
+    text-decoration: none;
+    transition: .5s;
+    font-size: 14px;
+
+}
+
+#navbar .nav_link:hover{
+    color: #999;
+}
+
+.title-container{
+    min-width: 500px;
+    text-align: center;
+    margin-top: 30px;
+}
+
+.title-container h1{
+    font-size: 50px;
+}
+
+.title-container p {
+    margin-top: 10px;
+    text-transform: uppercase;
+    color: #999;
+}
+
+.post-container{
+    /* para em telas grandes os posts ficarem centralizados e não ficarem expandidos  */
+    max-width: 1200px;
+    /* com o margin ajuda a centralizar */
+    margin: 0 auto;
+    margin-top: 30px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+/* aqui estamos dizendo que o 1 post tera 100% da tela, isso o deixara grande enquanto os outros menores */
+.post-box:first-child{
+    min-width:100%;
+}
+
+/* agora os outros post */
+.post-box{
+    flex: 1 1 0;
+    margin-bottom: 20px;
+}
+
+.post-box:nth-child(3){
+    margin: 0 1%;
+}
+
+.post-box img{
+    width: 100%;
+}
+
+.post-box .post-title a{
+    color: #000;
+    transition: .5s;
+    text-decoration: none;
+}
+
+.post-box .post-title a:hover{
+    color: #999;
+}
+
+.post-box .post-description{
+    color: #666;
+}
+
+.tags-container{
+    margin-top: 10px;
+}
+
+.tags-container a{
+    font-size: 14px;
+    color: #333;
+    display: inline-block;
+    margin-right: 5px;
+}
+
+footer{
+    /* representa 100% da página */
+    width: 100%;
+    /* posição absoluta para podermos jogar para o fundo */
+    position:absolute;
+    bottom: 0;
+    background-color: #000;
+    color: #fff;
+    text-align: center;
+    padding: 50px 0;
+
+}

@@ -1,0 +1,15 @@
+body{
+    margin: 0;
+    padding: 0;
+}
+
+.menu-lateral{
+   
+    background-color: #202736;
+    padding: 1rem;
+    height: 34rem !important;
+}
+
+.login-topo{
+    text-align: center;
+}
