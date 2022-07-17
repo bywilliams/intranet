@@ -7,6 +7,10 @@ require_once ("act_users/email_send.php");
 if (session_status() !== PHP_SESSION_ACTIVE) {
     session_start();
 }
+
+if($_SESSION["loggedin"] != true): 
+    header("location: ./error.php");
+endif;
 $id = $_SESSION["id"];
 
 
@@ -16,19 +20,8 @@ if (isset($_POST["sendmail"])) {
     $para = $_POST['email_to'];
     $assunto = $_POST['subject'];
     $corpo = $_POST['textarea'];
-    // $sendmail = $_POST['sendmail'];
-    // echo $para;
-    // echo $assunto;
-    // echo $corpo;
-    // if($sendmail):
-    //     echo "clicado";
-    // else:
-    //     echo "error";
-    // endif;
-    inc_envia_email($para, $assunto, $corpo); 
-
    
-
+    inc_envia_email($para, $assunto, $corpo); 
 }
 
 

@@ -9,28 +9,10 @@
     
     <!-- FONTS -->
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">
-    <!-- FONTAWESOME -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-
+    <!-- SWEET ALERT  -->
+    <script src="js/sweetalert.min.js"></script>
+    <!-- CSS LOCAL INDEX -->
     <link rel="stylesheet" href="css/style.css">
-
-    <script>
-        function valida(){
-            var username = document.getElementById('username');
-            var password = document.getElementById('password');
-    
-            if (username.value == "" || password.value == "") {
-                
-                swal("Preencha o campo usuário e senha!");
-                return false;
-            }else{
-                return true;
-            }
-
-        }
-    </script>
 
 </head>
 
@@ -80,6 +62,25 @@
     <script src="js/popper.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/main.js"></script>
+
+    <script>
+        function valida(){
+            var username = document.getElementById('username').value;
+            var password = document.getElementById('password').value;
+    
+            if (username == "") {
+                swal("Preencha o campo usuário!");
+                return false;
+            }else if (password == "") {
+                swal("Preencha o campo Senha!");
+                return false;
+            }else{
+                return true;
+            }
+
+        }
+    </script>
+
 
 </body>
 

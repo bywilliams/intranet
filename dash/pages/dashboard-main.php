@@ -8,6 +8,10 @@ if (session_status() !== PHP_SESSION_ACTIVE) {
     session_start();
 }
 
+if($_SESSION["loggedin"] != true): 
+    header("location: ./error.php");
+endif;
+
 // PEGA O HORÁRIO ATUAL DE ACORDO COM O TIMEZONE DE SP
 $timezone = new DateTimeZone('America/Sao_Paulo');
 $agora = new DateTime('now', $timezone);

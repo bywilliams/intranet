@@ -340,7 +340,7 @@ a {
 /* Dashboard COntent */
 .dashboard-content {
     padding: 35px 30px 60px 12px;
-    overflow: hidden;
+    /* overflow: hidden; */
 }
 
 iframe {
@@ -513,6 +513,15 @@ iframe {
 
 
 /* fim modal cadastro */
+
+.modal_{
+  display: none;
+}
+
+#span_{
+  text-decoration: none;
+ 
+}
 
 
 .container,

@@ -19,7 +19,10 @@ if (session_status() !== PHP_SESSION_ACTIVE) {
     session_start();
   }
 
-// echo $_SESSION['name'];
+
+if ($_SESSION["loggedin"] == false) {
+    header("location: pages/error.php");
+}
 
 // PEGA O HORÁRIO ATUAL DE ACORDO COM O TIMEZONE DE SP 
 $timezone = new DateTimeZone('America/Sao_Paulo');
@@ -59,6 +62,10 @@ if ($result->num_rows > 0) {
         $nivel_usuario = $row["nivel_usuario"];
     }
 }
+
+
+TODO: //google search API 'https://google-search3.p.rapidapi.com/api/v1/search/q=elon+musk'
+
 ?>
 
 <!DOCTYPE html>
@@ -175,10 +182,10 @@ if ($result->num_rows > 0) {
                                     }
                                ?>
                                 <li class="nav-item itens-menu">
-                                    <a href="<?=$BASE_URL?>pages/github.php" target="myFrame" onclick="topo();" class="nav-link active" data-toggle="collapse" data-target="#submenu-1"
+                                    <a href="<?=$BASE_URL?>pages/tarefas.php" target="myFrame" onclick="topo();" class="nav-link active" data-toggle="collapse" data-target="#submenu-1"
                                         aria-expanded="false" aria-controls="submenu-1">
-                                        <i class="bi bi-github icons-menu"></i>
-                                        Github
+                                        <i class="bi bi-list-task icons-menu"></i>
+                                        Tarefas
                                         <span class="badge badge-success"></span>
                                     </a>
                                 </li>

@@ -5,6 +5,11 @@ require_once ("../../conn/config.php");
 if (session_status() !== PHP_SESSION_ACTIVE) {
     session_start();
 }
+
+if($_SESSION["loggedin"] != true): 
+    header("location: ./error.php");
+endif;
+
 $id = $_SESSION["id"];
 ?>
 

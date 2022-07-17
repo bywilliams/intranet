@@ -9,15 +9,7 @@ if (session_status() !== PHP_SESSION_ACTIVE) {
 $id = $_SESSION['id'];
 
 
-$SQL = "SELECT nivel_usuario, password FROM usuarios WHERE id = $id";
-$result = $conn->query($SQL);
-if ($result->num_rows > 0) {
-    while($row = $result->fetch_assoc()) {
-        $nivel_usuario = $row['nivel_usuario'];
-    }
-}
-
-if ($nivel_usuario != 3) {
+if ($_SESSION["nivel"] != 3) {
     header("location: ./error.php");
 }
 
@@ -32,16 +24,13 @@ if ($nivel_usuario != 3) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Usuarios</title>
     <?php include_once("../../helpers/url.php");?>
-    <script src="<?=$BASE_URL?>css/sweetalert.min.js"></script>
+    <!-- <script src="<?=$BASE_URL?>css/sweetalert.min.js"></script> -->
     <link rel="stylesheet" href="../css/bootstrap.min.css">
     <link rel="stylesheet" href="<?=$BASE_URL?>../css/bootstrap-icons-1.8.3/bootstrap-icons.css" />
 
 
     <link rel="stylesheet" href="<?=$BASE_URL?>../css/style_local.css">
 
-    <script>
-
-    </script>
 </head>
 
 <body>

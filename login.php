@@ -31,6 +31,7 @@ if (empty($username_err) && empty($password_err)) {
         while($row = $result->fetch_assoc()) {
             $id = $row['id'];
             $senha = $row["password"];
+            $nivel_user = $row["nivel_usuario"];
         }
     }
 
@@ -40,6 +41,7 @@ if (empty($username_err) && empty($password_err)) {
         $_SESSION["loggedin"] = TRUE;
         $_SESSION["name"] = $username;
         $_SESSION["id"] = $id;
+        $_SESSION["nivel"] = $nivel_user;
         echo "Login efetuado, bem vindo ".$username. "!";
         header("location: ./dash/index.php");
     }else{

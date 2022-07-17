@@ -6,6 +6,12 @@ if (session_status() !== PHP_SESSION_ACTIVE) {
     session_start();
 }
 
+if($_SESSION["loggedin"] != true): 
+    header("location: ./error.php");
+endif;
+
+
+
 $search = "";
 if (strlen($_POST['search']) > 5)  {
     $search = $_POST['search'];
