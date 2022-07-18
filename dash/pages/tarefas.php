@@ -33,8 +33,7 @@ $id = $_SESSION['id'];
 
 <body>
 
-    <div class="row">
-        <div class="col-12">
+    
 
             <div class="container">
 
@@ -51,8 +50,8 @@ $id = $_SESSION['id'];
                                     <div class="card-body" style="background-color: #fff;">
                                        <div class="row"<?php if($_SESSION["nivel"] == 3){echo 'style="justify-content: end"';}?>>
                                         <div class="col-md-5"></div>
-                                        <div class="col-md-1" style="display: flex; font-size: 0.8rem;"><i class="bi bi-check text-success" style="font-size: 1rem;"></i>checa</div>
-                                        <div class="col-md-3"  style="display: flex; font-size: 0.8rem; justify-content: center;"><i class="bi bi-check-all text-success" style="font-size: 1rem;"></i>Atualiza no Sistema</div>
+                                        <div class="col-md-1" style="display: flex; font-size: 0.8rem;"><i class="bi bi-check2-square text-success" style="font-size: 1rem;"></i>Ticar</div>
+                                        <div class="col-md-3"  style="display: flex; font-size: 0.8rem; justify-content: center;"><i class="bi bi-check text-success" style="font-size: 1rem;"></i>Atualizar no Sistema</div>
                                         <?php
                                         if ($_SESSION["nivel"] != 3) {
                                             ?>
@@ -68,14 +67,15 @@ $id = $_SESSION['id'];
                                                     <th scope="col">Usuário</th>
                                                     <th scope="col">Tarefa</th>
                                                     <th scope="col">Prioridade</th>
-                                                    <th scope="col">Data a Concluir</th>
+                                                    <th scope="col">Concluir Até</th>
+                                                    <th scope="col">Status</th>
                                                     <th scope="col">Ações</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
 
                                                 <?php
-                                                $SQL_Select_Tarefa = "SELECT t.id, t.cd_user, t.name_task, t.priority, t.created_at, t.dt_expired, t.designado_por, u.profile_img, u.nome FROM tb_task AS t INNER JOIN usuarios AS u ON t.cd_user = u.id WHERE cd_user = $id ORDER BY priority ASC";
+                                                $SQL_Select_Tarefa = "SELECT t.id, t.cd_user, t.name_task, t.priority, t.status_task, t.created_at, t.dt_expired, t.designado_por, u.profile_img, u.nome FROM tb_task AS t INNER JOIN usuarios AS u ON t.cd_user = u.id WHERE cd_user = $id ORDER BY priority ASC";
                                                 //echo $SQL_Select_Tarefa;
                                                 $t = 0;
 
@@ -88,6 +88,7 @@ $id = $_SESSION['id'];
                                                         $task_id = $rowTarefas["id"];
                                                         $name_task = $rowTarefas["name_task"];
                                                         $priority = $rowTarefas["priority"];
+                                                        $status_task = $rowTarefas["status_task"];
                                                         $created_at = $rowTarefas["created_at"];
                                                         $dt_expired = $rowTarefas["dt_expired"];
                                                         $designado_por = $rowTarefas["designado_por"];
@@ -148,14 +149,23 @@ $id = $_SESSION['id'];
                                                         <h6 class="mb-0"><span class="badge"><?=$expired_at?></span>
                                                         </h6>
                                                     </td>
+                                                    <td class="align-middle" style="text-align: center;">
+                                                        <h6 class="mb-0"><span class="badge"><?php
+                                                            if(!empty($status_task)){
+                                                                echo '<i class="bi bi-check-all text-success" style="font-size: 1.5rem"></i>';
+                                                            }else{
+                                                                echo "Pendente";
+                                                            }?>
+                                                        </span></h6>
+                                                    </td>
                                                     <td class="align-middle">
                                                         <a href="#!" title="Feito" id="feito_<?=$t;?>"
                                                             onclick="check(<?=$t?>);"><i
-                                                                class="bi bi-check text-success"
+                                                                class="bi bi-check2-square text-success"
                                                                 style="font-size: 1.5rem;"></i></a>
-                                                                <a href="#!" title="Feito" id="feito_<?=$t;?>"
+                                                        <a href="<?=$BASE_URL?>act_users/task_act.php?action_atualiza=1&task_id=<?=$task_id?>" title="Feito" id="feito_<?=$t;?>"
                                                             onclick="check(<?=$t?>);"><i
-                                                                class="bi bi-check-all text-success"
+                                                                class="bi bi-check text-success"
                                                                 style="font-size: 1.5rem;"></i></a>
                                                         <?php 
                                                         if (empty($designado_por)) {
@@ -190,7 +200,7 @@ $id = $_SESSION['id'];
                                         <?php
                                         if ($_SESSION["nivel"] == 3) {
                                             ?>
-                                            <a href="<?=$BASE_URL?>/task_list.php" class="btn btn-primary" id="myBtn" target="myFrame">Ver Tarefas da Equipe</a>
+                                            <a href="<?=$BASE_URL?>/task_list.php" class="btn btn-outline-primary" id="myBtn" target="myFrame">Ver Tarefas da Equipe</a>
                                             <?php
                                         }
                                         ?>
@@ -273,8 +283,7 @@ $id = $_SESSION['id'];
 
             </div>
 
-        </div>
-    </div>
+    
 
 
 

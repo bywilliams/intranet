@@ -88,6 +88,7 @@ if ($_SESSION["nivel"] != 3) {
                                 $nivel = $row["nivel_usuario"];
                                 $password = $row["password"];
 
+                                
                         ?>
                     <tr class="btn-light" style="cursor:pointer;">
                         <td height="50" align="center" valign=""> <img class="user-avatar-md rounded-circle"

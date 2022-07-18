@@ -70,7 +70,7 @@ if ($_SESSION["nivel"] != 3) {
                                             <tbody>
 
                                                 <?php
-                                                $SQL_Select_Tarefa = "SELECT DISTINCT a.cd_user,a.name_task,a.priority,a.dt_expired,a.created_at,b.nome,b.profile_img,b.id FROM tb_task a,usuarios b WHERE a.cd_user = b.id AND a.dt_expired ORDER BY a.cd_user";
+                                                $SQL_Select_Tarefa = "SELECT DISTINCT a.cd_user,a.name_task,a.priority,a.status_task,a.dt_expired,a.created_at,b.nome,b.profile_img,b.id FROM tb_task a,usuarios b WHERE a.cd_user = b.id AND a.dt_expired ORDER BY a.cd_user";
                                                 //echo $SQL_Select_Tarefa;
                                                 $t = 0;
 
@@ -83,6 +83,7 @@ if ($_SESSION["nivel"] != 3) {
                                                         $task_id = $rowTarefas["id"];
                                                         $name_task = $rowTarefas["name_task"];
                                                         $priority = $rowTarefas["priority"];
+                                                        $status_task = $rowTarefas["status_task"];
                                                         $created_at = $rowTarefas["created_at"];
                                                         $dt_expired = $rowTarefas["dt_expired"];
                                                         //original date is in format YYYY-mm-dd
@@ -140,11 +141,16 @@ if ($_SESSION["nivel"] != 3) {
                                                         <h6 class="mb-0"><span class="badge"><?=$expired_at?></span>
                                                         </h6>
                                                     </td>
-                                                    <td class="align-middle">
-                                                        <a href="#!" title="Feito" id="feito_<?=$t;?>"
-                                                            onclick="check(<?=$t?>);"><i
-                                                                class="bi bi-check text-success"
-                                                                style="font-size: 1.5rem;"></i></a>
+                                                    <td class="align-middle" style="text-align: center;">
+                                                        <?php
+                                                        if (!empty($status_task)) {
+                                                            ?>
+                                                            <a href="#!" title="Feito" id="feito_<?=$t;?>"><i class="bi bi-check-all text-success" style="font-size: 1.5rem;"></i></a>
+                                                            <?php
+                                                        }else{
+                                                            echo "pendente";
+                                                        }
+                                                        ?>
                                                     </td>
                                                 </tr>
                                                 <?php
