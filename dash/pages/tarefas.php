@@ -5,11 +5,14 @@ require_once ("../../conn/config.php");
 if (session_status() !== PHP_SESSION_ACTIVE) {
     session_start();
 }
+require_once ("inc/valida_guest.php");
 
 if($_SESSION["loggedin"] != true): 
     header("location: ./error.php");
 endif;
 
+setlocale(LC_ALL, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
+date_default_timezone_set('America/Sao_Paulo');
 
 $id = $_SESSION['id'];
 
@@ -99,6 +102,10 @@ $id = $_SESSION['id'];
                                                         // echo $dia_expired;
                                                         //echo $expired_at;
 
+                                                        if (!empty($status_task)):
+                                                            $check_mark = "text-decoration: line-through; background-color: #00FFAB";
+                                                        endif;
+
                                                         $colorPriority = "";
                                                         if ($priority == 1):
                                                             $prioridade = "Alta Prioridade";
@@ -138,7 +145,7 @@ $id = $_SESSION['id'];
 
                                                     </th>
                                                     <td class="align-middle">
-                                                        <span id="span_<?=$t;?>"><?=$name_task?></span>
+                                                        <span id="span_<?=$t;?>" style="<?=$check_mark;?>"><?=$name_task?></span>
                                                     </td>
                                                     <td class="align-middle">
                                                         <h6 class="mb-0"><span

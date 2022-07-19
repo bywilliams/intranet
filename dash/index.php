@@ -1,27 +1,14 @@
-<script>
-    // APARECE DE LOGGOUT SENDO EFETUADO
-        function sair(){
-        var logout = document.getElementById('loggout').value;
-        alert('Saindo aguarde um instante ... ');
-        }
-
-        function topo()
-        {
-	      parent.scroll(0,0);
-         }
-</script>
 <?php
-
-require_once ("../conn/config.php");
-
 //Iniciando a sessão:
 if (session_status() !== PHP_SESSION_ACTIVE) {
     session_start();
-  }
+}
+require_once ("../conn/config.php");
+require_once ("pages/inc/valida_guest.php");
 
 
 if ($_SESSION["loggedin"] == false) {
-    header("location: pages/error.php");
+    header("location: ../index.php");
 }
 
 // PEGA O HORÁRIO ATUAL DE ACORDO COM O TIMEZONE DE SP 
@@ -40,6 +27,20 @@ if($hora_atual > 0 && $hora_atual <= 12){
     $msg_saudacao = "Boa noite!";
 }
 // fim bloco de codigo para saudação
+
+$id = $_SESSION["id"];
+echo $id;
+
+$ano = date('Y');
+$data = date('D'); // dia escrito ex: segunda
+$mes = date('M'); // mes escrito ex: julho
+$dia = date('d');
+$m = date('m'); 
+
+$h = date('H');
+$i = date('i');
+$s = date('s');
+
 
 // FAZ LOGGOUT AO CLICAR EM SAIR DA DASHBOARD
 if (isset($_GET["loggout"])) {
@@ -88,7 +89,7 @@ TODO: //google search API 'https://google-search3.p.rapidapi.com/api/v1/search/q
 </head>
 
 <body>
-    
+
     <div class="dashboard-main-wrapper">
         <div class="dashboard-header">
             <nav class="navbar navbar-expand-lg bg-white fixed-top border-bottom border-primary">
@@ -139,6 +140,7 @@ TODO: //google search API 'https://google-search3.p.rapidapi.com/api/v1/search/q
 
             </nav>
         </div>
+      
         <div class="nav-left-sidebar sidebar-dark">
             <div class="slimScrollDiv">
                 <div class="menu-list">
@@ -260,6 +262,7 @@ TODO: //google search API 'https://google-search3.p.rapidapi.com/api/v1/search/q
             </div>
 
         </div>
+   
 
         <div class="dashboard-wrapper">
             <div class="dashboard-ecommerce" >
@@ -287,6 +290,22 @@ TODO: //google search API 'https://google-search3.p.rapidapi.com/api/v1/search/q
         integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     
+    <script>    
+        // APARECE DE LOGGOUT SENDO EFETUADO
+        function sair(){
+        var logout = document.getElementById('loggout').value;
+        alert('Saindo aguarde um instante ... ');
+        }
+
+        function topo() {
+	      parent.scroll(0,0);
+         }
+
+        var convidado = document.getElementById('convidado').value;
+        if (convidado != "") {
+        alert('Saindo');
+        }
+    </script>
 </body>
 
 </html>

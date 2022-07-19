@@ -8,6 +8,8 @@ if (session_status() !== PHP_SESSION_ACTIVE) {
     session_start();
 }
 
+require_once ("inc/valida_guest.php");
+
 if($_SESSION["loggedin"] != true): 
     header("location: ./error.php");
 endif;
@@ -20,13 +22,26 @@ $agora = new DateTime('now', $timezone);
 $dia_atual = $agora->format('d');
 //echo $dia_atual;
 
+
 setlocale(LC_ALL, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
 date_default_timezone_set('America/Sao_Paulo');
 
-$data = date('D');
-$mes = date('M');
-$dia = date('d');
 $ano = date('Y');
+$data = date('D'); // dia escrito ex: segunda
+$mes = date('M'); // mes escrito ex: julho
+$dia = date('d');
+$m = date('m'); 
+
+// $h = date('H');
+// $i = date('i');
+// $s = date('s');
+
+$hora_atual = time();
+    $hora_acessou = $_SESSION['hora_acessou'];
+    $tempo_online = $hora_atual - $hora_acessou;
+
+echo $tempo_online;
+
 
 $semana = array(
     'Sun' => 'Domingo','Mon' => 'Segunda-Feira','Tue' => 'Terca-Feira','Wed' => 'Quarta-Feira','Thu' => 'Quinta-Feira','Fri' => 'Sexta-Feira','Sat' => 'Sábado'

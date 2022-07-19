@@ -6,6 +6,8 @@ if (session_status() !== PHP_SESSION_ACTIVE) {
     session_start();
 }
 
+require_once ("inc/valida_guest.php");
+
 if($_SESSION["loggedin"] != true): 
     header("location: ./error.php");
 endif;

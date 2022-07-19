@@ -27,13 +27,14 @@ if (!empty($_POST['username']) && !empty($_POST['password'])) {
 if (empty($username_err) && empty($password_err)) {
     // echo "Entrou aqui";
     // exit();
-    $SQL = "SELECT id, nivel_usuario, password FROM usuarios WHERE username = '$username'";
+    $SQL = "SELECT id, nivel_usuario,guest,password FROM usuarios WHERE username = '$username'";
     $result = $conn->query($SQL);
     if ($result->num_rows > 0) {
         while($row = $result->fetch_assoc()) {
             $id = $row['id'];
             $senha = $row["password"];
             $nivel_user = $row["nivel_usuario"];
+            $guest = $row["guest"];
         }
     }
     
@@ -45,7 +46,9 @@ if (empty($username_err) && empty($password_err)) {
         $_SESSION["name"] = $username;
         $_SESSION["id"] = $id;
         $_SESSION["nivel"] = $nivel_user;
-        echo "Login efetuado, bem vindo ".$username. "!";
+        $_SESSION["hora_acessou"] = time();
+        $_SESSION["guest"] = $guest;
+        echo "<script>alert('Login efetuado, bem vindo')</script>".$username."!";
         header("location: ./dash/index.php");
     }else{
         echo "Usuario ou senha invalidos";
