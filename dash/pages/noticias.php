@@ -47,49 +47,53 @@ curl_close($ch);
 </head>
 
 <body>
+    
     <div class="container-fluid dashboard-content">
-        <h1>Noticias</h1>
+       
+            <h1 class="mb-5">Notícias</h1>
 
-        <?php
-            $internet = fsockopen('www.google.com.br', 80);
-            if (!$internet) {
-                echo "Você esta sem internet no momento, verifique a conexão e tente novamente";
-            }else{
-                foreach ($newsData->articles as $news){
-                ?>
-                <div class="row newsGrid">
-                    <div class="col-md-6">
-                        <img src="<?php echo $news->urlToImage ?>" alt="image google" title="google_image">
-                        <?php
-                        if($news->author == true):
-                            echo "<p>$news->author ";
-                        else:
-                            echo "<p>Não tem autor ";
-                        endif;
-                        $data_noticia = strtotime($news->publishedAt);
-                        echo date('d/m/Y h:i', $data_noticia)."</p>";
-                       
-                        ?>
+            <?php
+                $internet = fsockopen('www.google.com.br', 80);
+                if (!$internet) {
+                    echo "Você esta sem internet no momento, verifique a conexão e tente novamente";
+                }else{
+                    foreach ($newsData->articles as $news){
+                    ?>
+                    <div class="row d-flex justify-content-center align-items-center newsGrid">
+                        <div class="col-md-4">
+                            <img src="<?php echo $news->urlToImage ?>" alt="image google" title="google_image" width="300" height="300" style="border-radius: 10px">
+                            <?php
+                            if($news->author == true):
+                                echo "<p>$news->author ";
+                            else:
+                                echo "<p>Não tem autor ";
+                            endif;
+                            $data_noticia = strtotime($news->publishedAt);
+                            echo date('d/m/Y h:i', $data_noticia)."</p>";
                         
+                            ?>
+                            
+
+                        </div>
+                        <div class="col-md-6">
+                            <h5><?=$news->title ?></h5>
+                            <h6><?=$news->description ?></h6>
+                            <p><?=$news->content ?></p>
+                            <p><strong>Leia mais:</strong> <br /> <br /> 
+                            <a href="<?=$news->url ?>" target="_blank"><button type="button" class="btn btn-outline-dark">Ir para a notícia</button></a></p>
+
+                        </div>
 
                     </div>
-                    <div class="col-md-6">
-                        <h5><?=$news->title ?></h5>
-                        <h6><?=$news->description ?></h6>
-                        <p><?=$news->content ?></p>
-                        <p><strong>Leia mais:</strong> <br /> <br /> 
-                        <a href="<?=$news->url ?>" target="_blank"><button type="button" class="btn btn-outline-dark">Ir para a notícia</button></a></p>
-
-                    </div>
-                    <div class="spacer">
-                        
-                    </div>
-                </div>
-        <?php
+                    <div class="spacer mb-5">
+                            
+                            </div>
+            <?php
+                    }
                 }
-            }
-            ?>
+                ?>
 
+       
     </div>
 </body>
 

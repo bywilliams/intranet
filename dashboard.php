@@ -45,11 +45,11 @@ $s = date('s');
 
 
 // FAZ LOGGOUT AO CLICAR EM SAIR DA DASHBOARD
-// if (isset($_GET["loggout"])) {
-//     unset($_SESSION["login"]);
-//     session_destroy();
-//     header("location: index.php");
-// }
+if (isset($_GET["loggout"])) {
+    unset($_SESSION["login"]);
+    session_destroy();
+    header("location: index.php");
+}
 
 
 $username = $_SESSION["name"];
@@ -80,11 +80,31 @@ TODO: //google search API 'https://google-search3.p.rapidapi.com/api/v1/search/q
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
-    <script src="js/sweetalert.min.js"></script>
-    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" /> -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <link rel="stylesheet" href="../../css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
-    <script src="dash/pages/js/showtime.js" type="text/javascript" async></script>
+
+    <style>
+.collapsible {
+ 
+  
+  cursor: pointer;
+  padding: 18px;
+ width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+}
+
+.content {
+  padding: 0 18px;
+  display: none;
+  overflow: hidden;
+  background-color: #003865;
+}
+    </style>
+
 </head>
 <?php require_once ("dash/pages/inc/valida_guest.php")?>
 <body>
@@ -112,38 +132,71 @@ TODO: //google search API 'https://google-search3.p.rapidapi.com/api/v1/search/q
                         Home</a>
                 </li>
                 <li>
-                    <a href="dash/pages/noticias.php" target="myFrame"><span class="fa-solid fa-newspaper mr-3 notif" ><small
-                                class="d-flex align-items-center justify-content-center">5</small></span>Noícias</a>
+                    <a href="dash/pages/noticias.php" target="myFrame"data-toggle="tooltip" data-placement="right" title="Notícias de agora"><span class="fa-solid fa-newspaper mr-3 notif" ><small
+                                class="d-flex align-items-center justify-content-center">!</small></span>Noícias</a>
                 </li>
                 <?php
                     if ($_SESSION["nivel"] == 3) {
                 ?>
                 <li>
-                    <a href="dash/pages/usuarios.php" target="myFrame"><span class="fa-solid fa-list-check mr-3"></span> Usuários</a>
+                    <a href="dash/pages/usuarios.php" target="myFrame"><span class="fa-solid fa-users mr-3"></span> Usuários</a>
                 </li>
                 <?php
                     }
                 ?>
                 <li>
-                    <a href="dash/pages/tarefas.php" target="myFrame"><span class="fa-solid fa-list-check mr-3"></span> Tarefas</a>
+                    <a href="dash/pages/tarefas.php" data-toggle="tooltip" data-placement="right" title="Você tem 7 tarefas" target="myFrame"><span class="fa-solid fa-list-check mr-3 notif"><small
+                                class="d-flex align-items-center justify-content-center">7</small></span>Tarefas</a>
                 </li>
+                <?php
+                    if ($_SESSION["nivel"] == 3) {
+                ?>
                 <li>
-                    <a href="dash/pages/e-mail.php" target="myFrame"><span class="fa-solid fa-envelope mr-3"></span> Enviar E-mail</a>
+                    <a href="dash/pages/e-mail.php" target="myFrame"><span class="fa-solid fa-envelope mr-3"></span> Enviar e-mail</a>
                 </li>
+                <?php
+                    }
+                ?>
                 <li>
                     <a href="dash/pages/apostilas.php" target="myFrame"><span class="fa-solid fa-book mr-3"></span> Apostilas</a>
                 </li>
+                <?php
+                    if ($_SESSION["nivel"] == 3) {
+                ?>
                 <li>
                     <a href="https://bywilliams.github.io/site/" target="myFrame"><span class="fa-solid fa-arrow-pointer mr-3"></span> Website</a>
                 </li>
+                <?php
+                    }
+                ?>
                 <li>
-                    <a href="https://www.youtube.com/channel/UCYRCkASNSxbKroHvEaSLV6Q" target="myFrame"><span class="fa-brands fa-youtube mr-3"></span> Canal Youtube</a>
+                    <a href="dash/pages/youtube.php" target="myFrame"><span class="fa-brands fa-youtube mr-3"></span> Youtube</a>
                 </li>
                 <li>
-                    <a href="dash/codandoofuturo/index.php" target="myFrame"><span class="fa-solid fa-blog mr-3"></span> Blog</a>
+                    <a type="button" class="collapsible" ><span class="fa-solid fa-blog mr-3"></span> Blog</a>
+                    <div class="content">
+                        <ul>
+                            <li style="list-style-type: none;">
+                                <a href="dash/pages/blog/index.php" target="myFrame"><span class="fa-solid fa-arrow-up-right-from-square mr-3"></span>Acessar</a>
+                            </li>
+                            <li style="list-style-type: none;">
+                                <a href="dash/pages/post_blog.php" target="myFrame"><span class="fa-solid fa-plus mr-3"></span>Criar Post</a>
+                            </li>
+                        </ul>
+                    </div>
                 </li>
                 <li>
-                    <a href="dash/pages/projetos.php" target="myFrame"><span class="fa-solid fa-diagram-project mr-3"></span> Projetos</a>
+                    <a type="button" class="collapsible"><span class="fa-solid fa-diagram-project mr-3"></span>Projetos</a>
+                    <div class="content">
+                        <ul>
+                            <li style="list-style-type: none;">
+                                <a href="dash/pages/projetos.php" target="myFrame"><span class="fa-solid fa-boxes-packing mr-3"></span>Lista de Projetos</a>
+                            </li>
+                            <li style="list-style-type: none;">
+                                <a href="dash/pages/projetos_create.php" target="myFrame"><span class="fa-solid fa-plus mr-3"></span>Adicionar Projeto</a>
+                            </li>
+                        </ul>
+                    </div>
                 </li>
                 <li>
                     <a href="dash/pages/info.php" target="myFrame"><span class="fa-solid fa-circle-info mr-3"></span> Informações</a>
@@ -157,7 +210,7 @@ TODO: //google search API 'https://google-search3.p.rapidapi.com/api/v1/search/q
 
         <!-- Page Content  -->
         <div id="content" class="p-4 pt-5">
-            <iframe src="dash/pages/dashboard-main.php" name="myFrame" allow="fullscreen" frameborder="0"></iframe>
+            <iframe src="dash/pages/dashboard-main.php" name="myFrame" allow="fullscreen" frameborder="0" style="overflow:hidden;height:100%;width:100%" height="100%" width="100%"></iframe>
         </div>
     </div>
 
@@ -165,7 +218,23 @@ TODO: //google search API 'https://google-search3.p.rapidapi.com/api/v1/search/q
     <script src="js/popper.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/main.js"></script>
+    <script src="js/sweetalert.min.js"></script>
     <script>
+    var coll = document.getElementsByClassName("collapsible");
+    var i;
+
+    for (i = 0; i < coll.length; i++) {
+    coll[i].addEventListener("click", function() {
+        this.classList.toggle("active");
+        var content = this.nextElementSibling;
+        if (content.style.display === "block") {
+        content.style.display = "none";
+        } else {
+        content.style.display = "block";
+        }
+    });
+    }
+
     // APARECE DE LOGGOUT SENDO EFETUADO
     function sair() {
         let timerInterval
@@ -192,6 +261,7 @@ TODO: //google search API 'https://google-search3.p.rapidapi.com/api/v1/search/q
         // alert('Saindo aguarde um instante ... ');
     }
 
+    // retornar ao topo da página
     function topo() {
         parent.scroll(0, 0);
     }
@@ -199,8 +269,15 @@ TODO: //google search API 'https://google-search3.p.rapidapi.com/api/v1/search/q
     var convidado = document.getElementById('convidado').value;
     if (convidado != "") {
         alert('Saindo');
-    }
+    }     
     </script>
+    <script>
+         // Tooltip 
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+    })
+    </script>
+    <script src="dash/pages/js/showtime.js" type="text/javascript" async></script>
 </body>
 
 </html>

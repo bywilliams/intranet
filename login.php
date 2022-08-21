@@ -8,9 +8,6 @@ require_once ("./conn/config.php");
 $username = $password = "";
 $username_err = $password_err = "";
 
-
-
-
 // checa se username e password foram preenchidos no sibmit
 if (!empty($_POST['username']) && !empty($_POST['password'])) {
     $username = strtolower($_POST['username']);
@@ -21,15 +18,9 @@ if (!empty($_POST['username']) && !empty($_POST['password'])) {
     $password_err = "Preencha o campo de senha";
 }
 
-// echo $username."<br>";
-// echo $password."<br>";
-
-// echo $username_err."<br>";
-
-
 // se os campos de erros estiverem vazios, entra no bloco de codigos para checar o usuario e senha
 if (empty($username_err) && empty($password_err)) {
-   
+  
     $SQL = "SELECT id, nivel_usuario,guest,password FROM usuarios WHERE username = '$username'";
     $result = $conn->query($SQL);
     if ($result->num_rows > 0) {
@@ -40,8 +31,7 @@ if (empty($username_err) && empty($password_err)) {
             $guest = $row["guest"];
         }
     }
-    // echo $id;
-    //     exit();
+   
     //echo $senha."<br>";
     if ($password === $senha) {
         session_regenerate_id();
@@ -51,7 +41,7 @@ if (empty($username_err) && empty($password_err)) {
         $_SESSION["nivel"] = $nivel_user;
         $_SESSION["hora_acessou"] = time();
         $_SESSION["guest"] = $guest;
-        echo "<script>alert('Login efetuado, bem vindo')</script>".$username."!";
+        echo "<script>alert('Login efetuado, bem vindo')</script>";
         header("location: dashboard.php");
     }else{
         echo "<script>alert('usuario ou senha invalidos')</script>";

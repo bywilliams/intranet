@@ -17,7 +17,7 @@
 </head>
 
 <body>
-    <section class="ftco-section login-body" style="background-color: #747474 !important; height: 100vh;">
+    <section class="ftco-section login-body" style="background-color: #003865 !important; height: 100vh;">
         <div class="container">
 
             <div class="row justify-content-center">
@@ -40,22 +40,20 @@
                                     <label class="label" for="password">Senha</label>
                                     <input type="password" name="password" id="password" class="form-control" placeholder="12345" required >
                                 </div>
+                                <div class="form-check">
+                                    <input type="checkbox" class="form-check-input" id="check_password"  onclick="show_password()">
+                                    <label class="form-check-label" for="exampleCheck1">Mostrar senha</label>
+                                </div>
+                                <br>
                                 <div class="form-group">
                                     <button type="submit" name="btn_salvar" class=" btn btn-outline-primary form-control rounded submit px-3" onclick="return valida();" >Entrar</button>
                                 </div>
                                 <div class="form-group d-md-flex">
-                                    <div class="w-100">
-                                        <a href="#" onclick="return esqueciSenha();">Esqueci a Senha</a> | <a href="#" class=""  data-toggle="modal" data-target="#exampleModal"><strong>Inscrever-se</strong></a>
-                                    </div>
+                                    <!-- <div class="w-100">
+                                        <a href="#" class=""  data-toggle="modal" data-target="#exampleModal"><strong>Inscrever-se</strong></a>
+                                    </div> -->
 
                                 </div>
-                                <!-- <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="container-fluid text-center">
-                                            <a href="#" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">Inscrever-se</a>
-                                            </div>
-                                        </div>
-                                </div> -->
                             </form>
                         </div>
                     </div>
@@ -107,15 +105,17 @@
 
         }
 
-        function esqueciSenha(){
-            // var username = document.getElementById('username').value;
-            // var password = document.getElementById('password').value;
-    
-                swal("Digite seu e-mail e clique em esqueci a senha!");
-
+       
+        function show_password(){
+           var password = document.getElementById('password');
+           if (password.type == "password") {
+                password.type = "text";
+           }else{
+            password.type = "password";
+           }
         }
-    </script>
 
+    </script>
 
 </body>
 

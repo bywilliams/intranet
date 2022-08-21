@@ -36,10 +36,9 @@ $id = $_SESSION['id'];
 
 <body>
 
-
-<section class="vh-100 ">
+<section class="vh-100 w-100">
     <div class="container h-100">
-        <div class="row d-flex justify-content-center align-items-center ">
+        <div class="row d-flex justify-content-center align-items-center mt-5">
             <div class="col-md-12 col-xl-10">
 
                 <div class="card ">
@@ -207,6 +206,7 @@ $id = $_SESSION['id'];
                         if ($_SESSION["nivel"] == 3) {
                             ?>
                             <a href="task_list.php" class="btn btn-outline-primary" id="myBtn" target="myFrame">Ver Tarefas da Equipe</a>
+                            <a href="task_historico.php" class="btn btn-outline-primary" id="myBtn" target="myFrame">Histórico</a>
                             <?php
                         }
                         ?>
