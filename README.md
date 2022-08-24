@@ -69,6 +69,8 @@ senha: convidado321
 
 > Intranet -> [Aplicação no Heroku](https://intranetbywilliams.herokuapp.com)
 
+> Video sobre o projeto -> [Youtube](https://www.youtube.com/watch?v=SSyommgWNSE)
+
 ## Autor
 
 > William Silva -> [Site e portfolio pessoal](https://bywilliams.github.io/portfolio/)
