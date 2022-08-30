@@ -9,12 +9,23 @@
     
     <!-- FONTS -->
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">
+    <!-- Font Awesome  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
     <!-- SWEET ALERT  -->
     <script src="js/sweetalert.min.js"></script>
     <!-- CSS LOCAL INDEX -->
     <link rel="stylesheet" href="css/style.css">
 
 </head>
+
+<style>
+    .p-viewer {
+	z-index: 9999;
+	position: absolute;
+	top: 30%;
+	right: 10px;
+}
+</style>
 
 <body>
     <section class="ftco-section login-body" style="background-color: #003865 !important; height: 100vh;">
@@ -38,11 +49,14 @@
                                 </div>
                                 <div class="form-group mb-3">
                                     <label class="label" for="password">Senha</label>
-                                    <input type="password" name="password" id="password" class="form-control" placeholder="12345" required >
-                                </div>
-                                <div class="form-check">
-                                    <input type="checkbox" class="form-check-input" id="check_password"  onclick="show_password()">
-                                    <label class="form-check-label" for="exampleCheck1">Mostrar senha</label>
+                                    <div class="pwd" style="position: relative">
+                                        <input type="password" name="password" id="password" class="form-control" placeholder="12345" required/>
+                                       <a href="#!" onclick="show_password()"><div class="p-viewer">
+                                            <i class="fa-solid fa-eye"></i>
+                                        </div></a> 
+                                       
+                                    </div>
+                                    
                                 </div>
                                 <br>
                                 <div class="form-group">
@@ -92,12 +106,14 @@
         function valida(){
             var username = document.getElementById('username').value;
             var password = document.getElementById('password').value;
+            
+            console.log(username + password);
     
             if (username == "") {
-                swal("Preencha o campo usuário!");
+                Swal.fire("Preencha o campo usuário!");
                 return false;
             }else if (password == "") {
-                swal("Preencha o campo Senha!");
+                Swal.fire("Preencha o campo Senha!");
                 return false;
             }else{
                 return true;

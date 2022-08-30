@@ -9,6 +9,7 @@ if (session_status() !== PHP_SESSION_ACTIVE) {
     session_start();
 }
 
+
 $id = $_SESSION['id'];
 
 if($_SESSION["loggedin"] != true): 
@@ -35,7 +36,7 @@ $m = date('m');
 
 
 # pega as útlimas 3 tarefas pendentes definidas como urgente
-$query_tarefas_urgentes = "SELECT name_task, status_task, dt_expired FROM tb_task WHERE status_task = 0 AND cd_user =".$id." ORDER BY dt_expired ASC LIMIT 3";
+$query_tarefas_urgentes = "SELECT name_task, status_task, dt_expired, priority FROM tb_task WHERE status_task = 0 AND cd_user =".$id." ORDER BY dt_expired ASC LIMIT 3";
 $result_tarefas_urgentes = $conn->query($query_tarefas_urgentes);
 
 
@@ -275,15 +276,26 @@ $mes_atual = $mes_extenso["$mes"];
                             while ($row_tarefas = $result_tarefas_urgentes->fetch_assoc()) {
                                 $name_tasks = $row_tarefas["name_task"];
                                 $status = $row_tarefas["status_task"];
+                                $priority = $row_tarefas["priority"];
+                                $prazo = $row_tarefas["dt_expired"];
+                                $colorPriority = "";
                                 if ($status == 0) {
                                     $status = "pendente";
                                 }
-                                $prazo = $row_tarefas["dt_expired"];
+                                if($priority == 1){
+                                    $colorPriority = "bg-danger";
+                                }else if($priority == 2){
+                                    $colorPriority = "bg-warning";
+                                }else{
+                                    $colorPriority = "bg-secondary";
+                                }
+
+                                
                                 if ($name_tasks != "") {
 ?>
                                 <tbody>
                                     <tr>
-                                        <td class="badge bg-danger" style="color: #fff; border-top: none;"><?=$name_tasks?></td>
+                                        <td class="badge <?=$colorPriority?>" style="color: #fff; border-top: none;"><?=$name_tasks?></td>
                                     </tr>
                                 </tbody>
 <?php
@@ -363,7 +375,6 @@ $mes_atual = $mes_extenso["$mes"];
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="../../js/Chart.js"></script>
     <!-- <script src="utils/charts_projects.js"></script> -->
-
     <!-- <script src=" js/currency_convert.js" type="text/javascript"></script> -->
     <script>
     let cardElement = document.querySelector(".card");
@@ -423,6 +434,7 @@ $mes_atual = $mes_extenso["$mes"];
     </script>
 
     <script>
+    // conversão do Real para Dolar e Euro
     $("#real").on("change", function() {
         var jsdolar = parseFloat('<?=$dollar?>').toFixed(2);
         var jseuro = parseFloat('<?=$euro?>').toFixed(2);
@@ -440,7 +452,7 @@ $mes_atual = $mes_extenso["$mes"];
 
     });
 
-
+    // conversão do Dolar para Real e Euro
     $("#dolar").on("change", function() {
         var jsdolar = parseFloat('<?=$dollar?>').toFixed(2);
         var jseuro = parseFloat('<?=$euro?>').toFixed(2);
@@ -456,6 +468,7 @@ $mes_atual = $mes_extenso["$mes"];
         }
     });
 
+     // conversão do Euro para Dolar e Real
     $("#euro").on("change", function() {
         var jsdolar = parseFloat('<?=$dollar?>').toFixed(2);
         var jseuro = parseFloat('<?=$euro?>').toFixed(2);
@@ -472,83 +485,85 @@ $mes_atual = $mes_extenso["$mes"];
     });
     </script>
 
-    <script>
-         // CHART 1
- var xValues1 = ["Concluido", "falta"];
- var yValues1 = [<?=$percent1?>, (100 - <?=$percent1?>)];
- var barColors1 = [
-     "#D1512D",
-     "#ccc"
- ];
+<script>
+    // Mychart graficos dos projetos em forma de pizza 
+    // CHART 1
+    var percent = "%";
+    var xValues1 = ["Concluido", "falta"];
+    var yValues1 = [<?=$percent1?>, (100 - <?=$percent1?>)];
+    var barColors1 = [
+        "#D1512D",
+        "#ccc"
+    ];
 
- // CHART 2
- var xValues2 = ["Concluido", "falta"];
- var yValues2 = [<?=$percent2?>, (100 - <?=$percent2?>)];
- var barColors2 = [
-     "#319DA0",
-     "#ccc"
- ];
+    // CHART 2
+    var xValues2 = ["Concluido", "falta"];
+    var yValues2 = [<?=$percent2?>, (100 - <?=$percent2?>)];
+    var barColors2 = [
+        "#319DA0",
+        "#ccc"
+    ];
 
-  // CHART 3
-  var xValues3 = ["Concluido", "falta"];
- var yValues3 = [<?=$percent3?>, (100 - <?=$percent3?>)];
- var barColors3 = [
-     "#781C68",
-     "#ccc"
- ];
+    // CHART 3
+    var xValues3 = ["Concluido", "falta"];
+    var yValues3 = [<?=$percent3?>, (100 - <?=$percent3?>)];
+    var barColors3 = [
+        "#781C68",
+        "#ccc"
+    ];
 
 
- new Chart("myChart1", {
-     type: "pie",
-     data: {
-         labels: xValues1,
-         datasets: [{
-             backgroundColor: barColors1,
-             data: yValues1
-         }]
-     },
-     options: {
-         title: {
-             display: true,
-             text: "% do Projeto <?=$title1?>"
-         }
-     }
- });
+    new Chart("myChart1", {
+        type: "pie",
+        data: {
+            labels: xValues1,
+            datasets: [{
+                backgroundColor: barColors1,
+                data: yValues1
+            }]
+        },
+        options: {
+            title: {
+                display: true,
+                text: "% do Projeto <?=$title1?>"
+            }
+        }
+    });
 
- new Chart("myChart2", {
-     type: "pie",
-     data: {
-         labels: xValues2,
-         datasets: [{
-             backgroundColor: barColors2,
-             data: yValues2
-         }]
-     },
-     options: {
-         title: {
-             display: true,
-             text: "% do Projeto <?=$title2?>"
-         }
-     }
- });
+    new Chart("myChart2", {
+        type: "pie",
+        data: {
+            labels: xValues2,
+            datasets: [{
+                backgroundColor: barColors2,
+                data: yValues2
+            }]
+        },
+        options: {
+            title: {
+                display: true,
+                text: "% do Projeto <?=$title2?>"
+            }
+        }
+    });
 
- new Chart("myChart3", {
-     type: "pie",
-     data: {
-         labels: xValues3,
-         datasets: [{
-             backgroundColor: barColors3,
-             data: yValues3
-         }]
-     },
-     options: {
-         title: {
-             display: true,
-             text: "% do Projeto <?=$title3?>"
-         }
-     }
- });
-    </script>
+    new Chart("myChart3", {
+        type: "pie",
+        data: {
+            labels: xValues3,
+            datasets: [{
+                backgroundColor: barColors3,
+                data: yValues3
+            }]
+        },
+        options: {
+            title: {
+                display: true,
+                text: "% do Projeto <?=$title3?>"
+            }
+        }
+    });
+</script>
 
 
 </body>

@@ -69,7 +69,7 @@ if (isset($_GET["envia_pesquisa"])) {
    //echo $sql_mount."<br>";
   
    
-    $SQL_Select_Tarefa = "SELECT DISTINCT a.cd_user,a.name_task,a.priority,a.status_task,a.dt_expired,a.created_at,b.nome,b.profile_img,b.id FROM tb_task a,usuarios b WHERE a.cd_user = b.id ".$sql_mount." ORDER BY a.cd_user";
+    $SQL_Select_Tarefa = "SELECT DISTINCT a.cd_user,a.name_task,a.priority,a.status_task,a.dt_expired,a.created_at,b.nome,b.profile_img,b.id FROM tb_task a,usuarios b WHERE a.cd_user = b.id AND a.cd_user <> 1 ".$sql_mount." ORDER BY a.cd_user";
     //echo $SQL_Select_Tarefa;
 }else{
     $SQL_Select_Tarefa = "SELECT DISTINCT a.cd_user,a.name_task,a.priority,a.status_task,a.dt_expired,a.created_at,b.nome,b.profile_img,b.id FROM tb_task a,usuarios b WHERE a.cd_user = b.id AND a.cd_user <> 1 ORDER BY a.cd_user";
@@ -119,9 +119,9 @@ if (isset($_GET["envia_pesquisa"])) {
                                 <div class="form-group col-md-3">
                                     <label for="">Usuario</label>
                                     <select class="form-control" name="user" id="">
-                                        <option value="">Selecione</option>
+                                        <option value="">Todos</option>
 <?php
-                                    $query_users = "SELECT * from usuarios";
+                                    $query_users = "SELECT * from usuarios WHERE id <> 1";
                                     $result_users = $conn->query($query_users);
                                     while ($row_users = $result_users->fetch_assoc()) {
                                         $nome = $row_users["nome"];

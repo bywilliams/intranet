@@ -132,7 +132,7 @@ TODO: //google search API 'https://google-search3.p.rapidapi.com/api/v1/search/q
                         Home</a>
                 </li>
                 <li>
-                    <a href="dash/pages/noticias.php" target="myFrame"data-toggle="tooltip" data-placement="right" title="Notícias de agora"><span class="fa-solid fa-newspaper mr-3 notif" ><small
+                    <a href="dash/pages/noticias.php" target="myFrame" data-toggle="tooltip" data-placement="right" title="Notícias de agora"><span class="fa-solid fa-newspaper mr-3 notif" ><small
                                 class="d-flex align-items-center justify-content-center">!</small></span>Noícias</a>
                 </li>
                 <?php
@@ -219,20 +219,21 @@ TODO: //google search API 'https://google-search3.p.rapidapi.com/api/v1/search/q
     <script src="js/bootstrap.min.js"></script>
     <script src="js/main.js"></script>
     <script src="js/sweetalert.min.js"></script>
+    <script src="dash/pages/js/showtime.js" type="text/javascript" async></script>
     <script>
     var coll = document.getElementsByClassName("collapsible");
     var i;
 
     for (i = 0; i < coll.length; i++) {
-    coll[i].addEventListener("click", function() {
-        this.classList.toggle("active");
-        var content = this.nextElementSibling;
-        if (content.style.display === "block") {
-        content.style.display = "none";
-        } else {
-        content.style.display = "block";
-        }
-    });
+        coll[i].addEventListener("click", function() {
+            this.classList.toggle("active");
+            var content = this.nextElementSibling;
+            if (content.style.display === "block") {
+            content.style.display = "none";
+            } else {
+            content.style.display = "block";
+            }
+        });
     }
 
     // APARECE DE LOGGOUT SENDO EFETUADO
@@ -272,12 +273,11 @@ TODO: //google search API 'https://google-search3.p.rapidapi.com/api/v1/search/q
     }     
     </script>
     <script>
-         // Tooltip 
+    // Tooltip menu 
     $(function () {
         $('[data-toggle="tooltip"]').tooltip()
     })
     </script>
-    <script src="dash/pages/js/showtime.js" type="text/javascript" async></script>
 </body>
 
 </html>
