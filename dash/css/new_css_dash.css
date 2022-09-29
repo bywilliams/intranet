@@ -1,0 +1,81 @@
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    font-family: 'sans-serif';
+    font-size: 1.1em;
+    text-align: center;
+    color: #000;
+}
+
+.holy-grail header,
+
+.hg-sidebar,
+.holy-grail-content {
+    padding: 20px;
+}
+
+.holy-grail header,
+.holy-grail footer {
+    background-color: #FFFFFF;
+    border-color: #007bff!important;
+}
+
+.holy-grail header{
+    /* height: 5rem; */
+    border-bottom: solid 1px;
+}
+
+.holy-grail footer {border-top: solid 1px;}
+
+.grail-sidebar-inside-content{
+    background-color: #243A73; 
+    /* height: 100vh; */
+    padding: 20px;
+}
+
+.hg-sidebar {background: #0E0C28;}
+
+.holy-grail-conent { color: #777;}
+
+.holy-grail { min-height: 100vh;}
+
+.holy-grail, .holy-grail-body {
+    display: flex;
+    flex: 1 1 auto;
+    flex-direction:column;
+}
+
+.holy-grail-content { 
+    flex: 1 1 auto;
+}
+
+.avatar-login{
+    justify-content: flex-end;
+}
+
+@media (min-width: 768px) {
+    .holy-grail-sidebar-1 {
+        order: -1;
+    }
+
+    .holy-grail-body {
+        flex-direction: row;
+    }
+
+    .hg-sidebar {
+        flex: 0 260px;
+    }
+}
+
+@media (max-width: 425px) {
+    .avatar-login{
+        justify-content: center;
+    display: flex;
+    margin-top: 1rem;
+    }
+    
+}

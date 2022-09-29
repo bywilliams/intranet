@@ -19,14 +19,16 @@ if (isset($_POST["salvar"])):
     $task_name = $_POST["taskname"];
     $task_date = $_POST["taskDate"];
     $priority = $_POST["priority"];
-    $task_to = $_POST["task_to"];
+    $task_to = "";
+    
     
     // echo $task_name;
     // echo $task_date;
     // echo $priority;
 
     // ADM ADCIONA A TAREFA PARA ALGUEM, SE NAO PROPRIO USUARIO ADCIONA SUA TAREFA
-    if (!empty($task_to)) {
+    if (!empty($_POST["task_to"])) {
+        $task_to = $_POST["task_to"];
         $SQL_Insert_Task = "INSERT INTO tb_task (
             cd_user,
             name_task,
@@ -74,7 +76,7 @@ endif;
 
 
 // SE BOTAO ATUALIZAR NO SISTEMA FOR CLICADO
-if ($_GET['action_atualiza'] == 1) {
+if (!empty($_GET['action_atualiza'])) {
     $task_id = $_GET['task_id'];
     //echo $task_id;
     $SQL_Atualiza_Task = "UPDATE tb_task SET status_task = 1 WHERE id = ".$task_id;

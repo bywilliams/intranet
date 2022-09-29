@@ -24,19 +24,18 @@ if ($_SESSION["nivel"] != 3) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Usuarios</title>
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.9.1/font/bootstrap-icons.min.css">
     <?php include_once("../../helpers/url.php");?>
-    <!-- <script src="<?=$BASE_URL?>css/sweetalert.min.js"></script> -->
-    <link rel="stylesheet" href="../css/bootstrap.min.css">
-    <link rel="stylesheet" href="<?=$BASE_URL?>../css/bootstrap-icons-1.8.3/bootstrap-icons.css" />
-
-
-    <link rel="stylesheet" href="<?=$BASE_URL?>../css/style_local.css">
+    <script src="<?=$BASE_URL?>../js/sweetalert.min.js"></script>
+    <link rel="stylesheet" href="../../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../css/style_local.css">
 
 </head>
 
-<body>
+<body style="overflow-x: hidden;">
 
-    <!-- <h1>Lista de Usuário</h1> -->
+    <h1>Lista de Usuários</h1>
 
     <div class="row">
         <div class="col-12">
@@ -44,11 +43,9 @@ if ($_SESSION["nivel"] != 3) {
             <div class="container">
                 <div class="row" style="margin: 5px 0;">
                     <div class="col-md-10">
-
-
                     </div>
                     <div class="col-md-2" style="padding-top: 5px; text-align: end; padding-right: 0;">
-                        <button class="btn btn-success" id="myBtn">Add</button>
+                        <button class="btn btn-success" id="myBtn">Adicionar</button>
                     </div>
 
                 </div>
@@ -69,8 +66,7 @@ if ($_SESSION["nivel"] != 3) {
                         <th width="20%" style="background-color: #243A73;  color: #fff; text-align: center;">
                             <strong></strong>Ações</td>
                     </tr>
-                    <?php
-                    
+<?php   
                         // PEGA OS DADOS DO USUARIO 
                         $SQL_IMG_PROFILE = "SELECT id, username, nome, password, created_at, email, nivel_usuario, profile_img FROM usuarios WHERE id > 0 ";
                         //echo $SQL_IMG_PROFILE."<br>";
@@ -90,103 +86,111 @@ if ($_SESSION["nivel"] != 3) {
                                 $password = $row["password"];
 
                                 
-                        ?>
+?>
                     <tr class="btn-light" style="cursor:pointer;">
                         <td height="50" align="center" valign=""> <img class="user-avatar-md rounded-circle"
-                                src="<?=$BASE_URL?>../images/<?=$img_profile;?>" data-holder-rendered="true"></td>
+                                src="../images/<?=$img_profile;?>" data-holder-rendered="true"></td>
                         <td height="50"><?=$username?></td>
                         <td height="50"><?=$nome?></td>
                         <td height="50" align="left"><?=$data_cadastro?></td>
                         <td height="50" align="center"><?=$nivel?></td>
                         <td align="center">
-                            <button class="btn btn-primary" title="Editar" id="btn_editar<?=$t;?>" onclick="atualizar(<?=$t;?>)"><i
-                                    class="bi bi-pencil-square icons-menu" id="btn_editar<?=$t;?>"></i></button>
+                            <button class="btn btn-primary" title="Editar" id="btn_editar<?=$t;?>"
+                                onclick="atualizar(<?=$t;?>)"><i class="bi bi-pencil-square icons-menu"
+                                    id="btn_editar<?=$t;?>"></i></button>
                             <input type="text" hidden name="codigo" value="<?=$id;?>">
                             <a href="act_users/delete.php?id=<?=$id;?>&profile_img=<?=$img_profile;?>"
                                 class="btn btn-danger" id="delete" name="delete" title="Deletar"><i
                                     class="bi bi-trash icons-menu"></i></a>
                         </td>
                     </tr>
-                   
+
                     <!-- The Modal Update-->
                     <div id="myModal2<?=$t;?>" class="modal_editar" ">
 
                         <!-- Modal content -->
-                        <div class="modal-content_editar">
-                            <div class="modal-header">
-                                <h3>Editar Usuário</h3>
-                                <span class="close-2<?=$t;?>" id="close-2" >&times;</span>
-                            </div>
-                            <div class="modal-body">
-                                <form method="post" action="act_users/update.php" enctype="multipart/form-data">
-                                <input type="text" hidden name="id" value="<?=$id;?>">
-                                    <div class="form-row">
-                                        <div class="form-group col-md-6">
-                                            <label for="inputEmail4">Nome Completo</label>
-                                            <input type="text" class="form-control" id="nome" name="nome_update" value="<?=$nome;?>">
-                                        </div>
-                                        <div class="form-group col-md-6">
-                                            <label for="inputEmail4">Email</label>
-                                            <input type="email" class="form-control" name="email_update" id="email" value="<?=$email;?>">
-                                        </div>
-                                    </div>
-                                    <div class="form-row">
-                                        <div class="form-group col-md-6">
-                                            <label for="inputAddress">Usuário</label>
-                                            <input type="text" class="form-control" name="usuario_update" id="usuario" value="<?=$username;?>">
-                                        </div>
-                                        <div class="form-group col-md-6">
-                                            <label for="inputPassword4">Senha</label>
-                                            <input type="password" name="password_update" class="form-control"
-                                                id="inputPassword" value="<?=$password;?>">
-                                        </div>
-                                    </div>
-
-                                    <div class="form-row">
-                                        <div class="form-group col-md-4">
-                                            <label for="inputState">Nivel de Acesso:</label>
-                                            <input type="radio" id="contactChoice1" name="nivel_update" value="1" <?php if($nivel == 1){echo "checked";}?>>
-                                            <label for="contactChoice1">1</label>
-
-                                            <input type="radio" id="contactChoice2" name="nivel_update" value="2" <?php if($nivel == 2){echo "checked";}?>>
-                                            <label for="contactChoice2">2</label>
-
-                                            <input type="radio" id="contactChoice3" name="nivel_update" value="3" <?php if($nivel == 3){echo "checked";}?>>
-                                            <label for="contactChoice3">3</label>
-                                            <p class="niveis">Nivel 1: Usuario <br />
-                                                Nivel 2: Administrador <br />
-                                                Nivel 3: Owner (Dono)</p>
-                                        </div>
-                                        <div class="form-group col-md-2">
-                                            <label for="inputZip">Foto de Perfil</label>
-                                            <input type="file" name="imagem_update"  accept="image/png,image/jpeg,image/jpg" />
-                                        </div>
-                                    </div>
-
-                                    <button type="submit" name="update" class="btn btn-primary">Atualizar</button>
-                                </form>
-                            </div>
-                            <div class="modal-footer">
-                                <h3><a href="" style="color: #fff;">Fechar</i></a></h3>
-                            </div>
+                        <div class=" modal-content_editar">
+                        <div class="modal-header">
+                            <h3>Editar Usuário</h3>
+                            <span class="close-2<?=$t;?>" id="close-2">&times;</span>
                         </div>
+                        <div class="modal-body">
+                            <form method="post" action="act_users/update.php" enctype="multipart/form-data">
+                                <input type="text" hidden name="id" value="<?=$id;?>">
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <label for="inputEmail4">Nome Completo</label>
+                                        <input type="text" class="form-control" id="nome" name="nome_update"
+                                            value="<?=$nome;?>">
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="inputEmail4">Email</label>
+                                        <input type="email" class="form-control" name="email_update" id="email"
+                                            value="<?=$email;?>">
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <label for="inputAddress">Usuário</label>
+                                        <input type="text" class="form-control" name="usuario_update" id="usuario"
+                                            value="<?=$username;?>">
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="inputPassword4">Senha</label>
+                                        <input type="password" name="password_update" class="form-control"
+                                            id="inputPassword" value="<?=$password;?>">
+                                    </div>
+                                </div>
 
+                                <div class="form-row">
+                                    <div class="form-group col-md-4">
+                                        <label for="inputState">Nivel de Acesso:</label>
+                                        <input type="radio" id="contactChoice1" name="nivel_update" value="1"
+                                            <?php if($nivel == 1){echo "checked";}?>>
+                                        <label for="contactChoice1">1</label>
+
+                                        <input type="radio" id="contactChoice2" name="nivel_update" value="2"
+                                            <?php if($nivel == 2){echo "checked";}?>>
+                                        <label for="contactChoice2">2</label>
+
+                                        <input type="radio" id="contactChoice3" name="nivel_update" value="3"
+                                            <?php if($nivel == 3){echo "checked";}?>>
+                                        <label for="contactChoice3">3</label>
+                                        <p class="niveis">Nivel 1: Usuario <br />
+                                            Nivel 2: Administrador <br />
+                                            Nivel 3: Owner (Dono)</p>
+                                    </div>
+                                    <div class="form-group col-md-2">
+                                        <label for="inputZip">Foto de Perfil</label>
+                                        <input type="file" name="imagem_update"
+                                            accept="image/png,image/jpeg,image/jpg" />
+                                    </div>
+                                </div>
+
+                                <button type="submit" name="update" class="btn btn-primary">Atualizar</button>
+                            </form>
+                        </div>
+                        <!-- <div class="modal-footer">
+                            <h3><a href="" style="color: #fff;">Fechar</i></a></h3>
+                        </div> -->
                     </div>
 
             </div>
+
         </div>
-        <?php
+    </div>
+<?php
                     }
-                    ?>
+?>
 
-        <?php
+<?php
                 }
-                ?>
+?>
 
-        <?php
-                ?>
-        <hr />
-        </table>
+<?php
+?>
+    <hr />
+    </table>
 
     </div>
 
@@ -204,36 +208,38 @@ if ($_SESSION["nivel"] != 3) {
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="inputEmail4">Nome Completo</label>
-                            <input type="text" class="form-control" id="nome" name="nome" placeholder="João da Sousa">
+                            <input type="text" class="form-control" id="nome" name="nome" placeholder="João da Sousa"
+                                required>
                         </div>
                         <div class="form-group col-md-6">
                             <label for="inputEmail4">Email</label>
                             <input type="email" class="form-control" name="email" id="email"
-                                placeholder="joazinho@gmail.com">
+                                placeholder="joazinho@gmail.com" required>
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="inputAddress">Usuário</label>
-                            <input type="text" class="form-control" name="usuario" id="usuario" placeholder="joazinho">
+                            <input type="text" class="form-control" name="usuario" id="usuario" placeholder="joazinho"
+                                required>
                         </div>
                         <div class="form-group col-md-6">
                             <label for="inputPassword4">Senha</label>
                             <input type="password" name="password" class="form-control" id="inputPassword"
-                                placeholder="123456">
+                                placeholder="123456" required>
                         </div>
                     </div>
 
                     <div class="form-row">
                         <div class="form-group col-md-4">
                             <label for="inputState">Nivel de Acesso:</label>
-                            <input type="radio" id="contactChoice1" name="nivel" value="1">
+                            <input type="radio" id="contactChoice1" name="nivel" value="1" required>
                             <label for="contactChoice1">1</label>
 
-                            <input type="radio" id="contactChoice2" name="nivel" value="2">
+                            <input type="radio" id="contactChoice2" name="nivel" value="2" required>
                             <label for="contactChoice2">2</label>
 
-                            <input type="radio" id="contactChoice3" name="nivel" value="3">
+                            <input type="radio" id="contactChoice3" name="nivel" value="3" required>
                             <label for="contactChoice3">3</label>
                             <p class="niveis">Nivel 1: Usuario <br />
                                 Nivel 2: Administrador <br />
@@ -248,9 +254,9 @@ if ($_SESSION["nivel"] != 3) {
                     <button type="submit" name="salvar" class="btn btn-primary">Registrar</button>
                 </form>
             </div>
-            <div class="modal-footer">
+            <!-- <div class="modal-footer">
                 <h3><a href="" style="color: #fff;">Fechar</i></a></h3>
-            </div>
+            </div> -->
         </div>
 
     </div>
@@ -299,7 +305,7 @@ if ($_SESSION["nivel"] != 3) {
 
         //PEGA O BOTAO QUE VAI ABRIR O MODAL
         var btn2 = document.getElementById("btn_editar" + i);
-       
+
 
 
         // PEGA O ELEMENTO SPAN QUE FECHA O MODAL
@@ -317,8 +323,6 @@ if ($_SESSION["nivel"] != 3) {
 
     }
     </script>
-
-
 
 </body>
 

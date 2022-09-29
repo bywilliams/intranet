@@ -9,7 +9,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!--- estilos do projeto -->
-    <link rel="stylesheet" href="<?= $BASE_URL ?>/css/styles.css">
+    <link rel="stylesheet" href="<?=   ?>/css/styles.css">
     <!---- fonts do projeto --->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -19,15 +19,15 @@
 </head>
 <body>
     <header>
-        <a href="<?= $BASE_URL ?>" id="logo">
-            <img src="<?= $BASE_URL ?>/img/logo.svg" alt="Blog Codar">
+        <a href="<?=   ?>" id="logo">
+            <img src="<?=   ?>/img/logo.svg" alt="Blog Codar">
         </a>
         <nav>
             <ul id="navbar">
-                <li><a href="<?= $BASE_URL ?>" class="nav_link">Home</a></li>
+                <li><a href="<?=   ?>" class="nav_link">Home</a></li>
                 <li><a href="#" class="nav_link">Categorias</a></li>
                 <li><a href="#" class="nav_link">Sobre</a></li>
-                <li><a href="<?= $BASE_URL ?>/contact.php" class="nav_link">Contato</a></li>
+                <li><a href="<?=   ?>/contact.php" class="nav_link">Contato</a></li>
             </ul>
             
         </nav>

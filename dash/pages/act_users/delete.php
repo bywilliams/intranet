@@ -24,7 +24,7 @@ endif;
 
 // DELETE USUARIO DO BANCO
 $SQL_Delete = "DELETE FROM usuarios WHERE id = '$id'";
-if($result_insert = mysqli_query($conn,$SQL_Delete)):
+if($result_delete = mysqli_query($conn,$SQL_Delete)):
     echo "<script>
 	alert('Usuario excluído com sucesso!'); location= '../usuarios.php';
 	</script>";

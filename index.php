@@ -9,6 +9,8 @@
     
     <!-- FONTS -->
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">
+    <!-- Font Awesome  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
     <!-- SWEET ALERT  -->
     <script src="js/sweetalert.min.js"></script>
     <!-- CSS LOCAL INDEX -->
@@ -16,8 +18,17 @@
 
 </head>
 
+<style>
+    .p-viewer {
+	z-index: 9999;
+	position: absolute;
+	top: 30%;
+	right: 10px;
+}
+</style>
+
 <body>
-    <section class="ftco-section login-body" style="background-color: teal !important; height: 100vh;">
+    <section class="ftco-section login-body" style="background-color: #003865 !important; height: 100vh;">
         <div class="container">
 
             <div class="row justify-content-center">
@@ -38,21 +49,49 @@
                                 </div>
                                 <div class="form-group mb-3">
                                     <label class="label" for="password">Senha</label>
-                                    <input type="password" name="password" id="password" class="form-control" placeholder="12345" required >
+                                    <div class="pwd" style="position: relative">
+                                        <input type="password" name="password" id="password" class="form-control" placeholder="12345" required/>
+                                       <a href="#!" onclick="show_password()"><div class="p-viewer">
+                                            <i class="fa-solid fa-eye"></i>
+                                        </div></a> 
+                                       
+                                    </div>
+                                    
                                 </div>
+                                <br>
                                 <div class="form-group">
-                                    <button type="submit" name="btn_salvar"
-                                        class="form-control btn btn-primary rounded submit px-3" onclick="return valida();" >Entrar</button>
+                                    <button type="submit" name="btn_salvar" class=" btn btn-outline-primary form-control rounded submit px-3" onclick="return valida();" >Entrar</button>
                                 </div>
                                 <div class="form-group d-md-flex">
-                                    <div class="w-100 text-center">
-                                        <a href="#">Esqueci a Senha</a>
-                                    </div>
+                                    <!-- <div class="w-100">
+                                        <a href="#" class=""  data-toggle="modal" data-target="#exampleModal"><strong>Inscrever-se</strong></a>
+                                    </div> -->
 
                                 </div>
                             </form>
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal Inscrever-se -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Increver-se</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    ...
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                    <button type="button" class="btn btn-primary">Salvar Alterações</button>
+                </div>
                 </div>
             </div>
         </div>
@@ -67,20 +106,32 @@
         function valida(){
             var username = document.getElementById('username').value;
             var password = document.getElementById('password').value;
+            
+            console.log(username + password);
     
             if (username == "") {
-                swal("Preencha o campo usuário!");
+                Swal.fire("Preencha o campo usuário!");
                 return false;
             }else if (password == "") {
-                swal("Preencha o campo Senha!");
+                Swal.fire("Preencha o campo Senha!");
                 return false;
             }else{
                 return true;
             }
 
         }
-    </script>
 
+       
+        function show_password(){
+           var password = document.getElementById('password');
+           if (password.type == "password") {
+                password.type = "text";
+           }else{
+            password.type = "password";
+           }
+        }
+
+    </script>
 
 </body>
 

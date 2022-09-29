@@ -3,13 +3,439 @@ body{
     padding: 0;
 }
 
-.menu-lateral{
-   
-    background-color: #202736;
-    padding: 1rem;
-    height: 34rem !important;
+/* MEDIA RESPONSIVIDADE */
+
+iframe {
+    height: 100vh;        /* Viewport-relative units */
+    width: 100%;
 }
 
-.login-topo{
-    text-align: center;
+.container{
+    margin-top: 0.3rem;
+    width:100% !important;
+    max-width: 100%;
+    height:100%;
+    perspective: 1000;
+    -webkit-perspective: 1000;
+    left:calc(50% - 200px);
+    top:calc(50vh - 100px);
+  }
+
+.card{
+    width:100%;
+    height:91%;
+    /* position:absolute; */
+    transform-style:preserve-3d;
+    -webkit-transform-style:preserve-3d;
+    transition:transform 1s ease;
+  }
+
+  .card_tarefas {
+    width: 100%;
+    height: auto;
+    position: absolute;
+    
 }
+  .back, .front{
+    border-radius:6px;
+    position:absolute;
+    width:100%;
+    height:100%;
+    transform-style:preserve-3d;
+    -webkit-transform-style:preserve-3d;
+    
+    backface-visibility:hidden;
+    -webkit-backface-visibility:hidden;
+  }
+  .contentfront{
+    width:100%;
+    height:100%;
+    display: flex;
+    transform:translatez(60px);
+    -webkit-transform:translatez(60px);
+    
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    
+    transform-style:preserve-3d;
+    -webkit-transform-style:preserve-3d;
+    
+  }
+
+ 
+  .contentback{
+    width:100%;
+    height:100%;
+    float:left;
+    transform:translatez(60px);
+    -webkit-transform:translatez(60px);
+    
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    
+    transform-style:preserve-3d;
+    -webkit-transform-style:preserve-3d;
+    
+  }
+  .back{
+    transform:rotateY(180deg);
+    background-color:#232227;
+    -webkit-backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
+    -o-backface-visibility: hidden;
+    backface-visibility: hidden;
+  }
+  .front{
+    text-transform:uppercase;
+    background-color:#232227;
+    -webkit-backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
+    -o-backface-visibility: hidden;
+    backface-visibility: hidden;
+  }
+  .date{
+    
+    height:100%;
+    width:130px;
+    float:initial;
+    background-color:#1F4690;
+    border-radius:0 6px 6px 0;
+    text-align:right;
+    padding:10px 30px;
+    box-sizing:border-box;
+    transform-style:preserve-3d;
+    -webkit-transform-style:preserve-3d;
+  }
+  .datecont{
+    height:100%;
+    transform:translatez(60px) scale(.9);
+    -webkit-transform:translatez(60px) scale(.9);
+  }
+  #date{
+    font-size:50px;
+    color:#ECECE7;
+    font-family: 'Montserrat', sans-serif;
+    font-weight:500;
+    float:right;
+  }
+  #day{
+    float:right;
+    font-size:14px;
+    color:#ffffff;
+    font-family: 'Montserrat', sans-serif;
+    font-weight:400;
+  }
+  #month{
+    float:right;
+    font-size:10px;
+    color:#ffffff;
+    font-family: 'Montserrat', sans-serif;
+    font-weight:200;
+  }
+  .date i{
+    color:#ECECE7;
+    position:absolute;
+    bottom:10px;
+    right:0;
+  }
+  .date i:hover{
+    color:#232227;
+    transition:.3s ease;
+  }
+  .month{
+    height:100%;
+    width:270px;
+    float:left;
+    padding:20px 30px;
+    box-sizing:border-box;
+  }
+  .month table{
+    width:100%;
+  }
+  .orangeTr{
+    color:#E76642;
+  }
+  .whiteTr{
+    color:#ECECE7;
+    
+  }
+  .whiteTr th:hover{
+    color:#E76642;
+    transition:.3s ease;
+  }
+  .month tr{
+    height:24px;
+  }
+  .month th{
+    width:14%;
+    font-size:10px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight:400;
+  }
+  
+  .flipped{
+    transform:rotateY(-180deg);
+    /*height:400px;
+    width:200px;
+    left:calc(50% - 100px);
+    top:calc(50vh - 200px);*/
+  }
+  .backcontainer{
+    transform-style:preserve-3d;
+    width:calc(100% - 60px);
+    height:calc(100% - 40px);
+    float:left;
+    margin-left:30px;
+    margin-top:20px;
+    /*transform:translatez(60px) scale();*/
+    color: #fff;;
+    background-color:#1F4690;
+    border-radius:6px;
+    padding:10px 30px;
+    box-sizing:border-box;
+    transform-style:preserve-3d;
+    -webkit-transform-style:preserve-3d;
+  }
+
+  .news_api{
+    margin-left: 2rem;
+  }
+
+  .newsGrid img{
+    width:100%;
+  }
+
+  .spacer{
+    border-bottom: solid 2px #ccc;
+    width: 300px;
+    /* height: 1px; */
+    margin: 1rem auto;
+  }
+
+
+
+  /* MODAL  */
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+.modal_editar {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  
+  overflow: initial; /* Enable scroll if needed */
+  /* background-color: rgb(0,0,0); 
+  background-color: rgba(0,0,0,0.4); */
+}
+
+/* Modal Content */
+.modal-content {
+  position: relative;
+  background-color: #fefefe;
+  margin: auto;
+  padding: 0;
+  border: 1px solid #888;
+  width: 80%;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+  -webkit-animation-name: animatetop;
+  -webkit-animation-duration: 0.4s;
+  animation-name: animatetop;
+  animation-duration: 0.4s
+}
+
+.modal-content_editar {
+  position: relative;
+  background-color: #fefefe;
+  margin: auto;
+  padding: 0;
+  border: 1px solid #888;
+  width: 80%;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+  -webkit-animation-name: animatetop;
+  -webkit-animation-duration: 0.4s;
+  animation-name: animatetop;
+  animation-duration: 0.4s
+}
+
+/* Add Animation */
+@-webkit-keyframes animatetop {
+  from {top:-300px; opacity:0} 
+  to {top:0; opacity:1}
+}
+
+@keyframes animatetop {
+  from {top:-300px; opacity:0}
+  to {top:0; opacity:1}
+}
+
+/* The Close Button */
+.close {
+  color: white;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+
+#close-2 {
+  color: white;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+#close-2:hover,
+#close-2:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+
+/* Modal cadastro */
+
+.modal-header {
+  padding: 2px 16px;
+  background-color: #243A73;
+  color: white;
+}
+
+.modal-body {padding: 10px 16px !important;}
+
+.modal-footer {
+  padding: 2px 16px;
+  background-color: #243A73;
+  color: white;
+}
+
+.niveis{
+  font-size: 13px;
+  color: #990000;
+  font-weight: bold;
+}
+
+input::placeholder {
+  color: #DDDDDD!important;
+}
+
+
+table.tabela_cor tr:hover {
+  background: #F0F0F0;
+}
+
+
+/* fim modal cadastro */
+
+.modal_{
+display: none;
+}
+
+#span_{
+text-decoration: none;
+
+}
+
+.user-avatar-md{
+  max-width: 5rem;
+  max-height: 4rem;
+}
+
+/* Fim CSS Usuarios */
+
+/* Inicio estilo Projetos */
+.tooltip_{
+  display: none;
+}
+  #conteudo {
+
+margin-top:-5px;
+left: 36px;
+padding:0px 15px;
+box-shadow:0px 0px 3px #777;
+background-color: #fff;
+width:250px;
+color:gray;
+/* display:none; */
+position:absolute; 
+z-index: 99999;   
+}
+
+#conteudo h1 {
+font-size:20px;
+margin:0;
+}
+
+#conteudo:before { /*a seta do div flutuante*/
+content: "";
+position: absolute;
+top: -10px;
+left: 135px;
+height: 20px;
+width: 20px;
+background-color: white;
+transform: rotate(45deg);
+box-shadow: -2px -2px 1px #ccc;
+}
+
+.aplicar {
+/* text-decoration:none; */
+/* color:#2dabb9; */
+font-size:15px;
+position:absolute;
+right:5px;
+bottom:5px;
+}
+
+.bloco {
+padding:20px 0px;
+position:relative;
+}
+
+.bloco:not(:last-child) {
+border-bottom:1px solid #ccc;
+}
+
+label {
+display:block;
+color:#5f5f5f;
+margin-bottom: 0.2rem;
+}
+
+/* Fim estilo projetos */
+
+  @media screen and (max-width: 425px){
+    .container {
+        -webkit-perspective: 2000;
+    }
+
+    .row{
+        margin-right: 0;
+    }
+
+    .news_api{
+        margin: 0;
+      }
+  }

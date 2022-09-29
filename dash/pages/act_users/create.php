@@ -19,9 +19,13 @@ if(isset($_POST["salvar"])):
 		$extensao = strtolower(substr($_FILES['imagem']['name'], -4)); // Pega nome da extensao do arquivo
 		$nome_imagem = md5(time()) . $extensao; // define nome para o arquivo
 		$diretorio = "../../images/"; // Define o diretorio para onde o arquivo vai ser enviado
+
+       // echo "$extensao , $nome_imagem";
        
 		move_uploaded_file($_FILES['imagem']['tmp_name'], $diretorio.$nome_imagem); // efetua o upload
 	endif;
+
+    // exit();
     
     $SQL_Insert = "INSERT INTO usuarios (
         username, 

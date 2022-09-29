@@ -37,11 +37,11 @@ if (isset($_POST["sendmail"])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Projetos</title>
     <?php include_once("../../helpers/url.php");?>
-    <script src="<?=$BASE_URL?>css/sweetalert.min.js"></script>
-    <link rel="stylesheet" href="../css/bootstrap.min.css">
-    <link rel="stylesheet" href="<?=$BASE_URL?>../css/bootstrap-icons-1.8.3/bootstrap-icons.css" />
-    <link rel="stylesheet" href="<?=$BASE_URL?>../css/style_local.css">
-    <script src="<?=$BASE_URL?>js/tinymce/tinymce.min.js"></script>
+    <script src=" css/sweetalert.min.js"></script>
+    <?php include_once("../../helpers/url.php");?>
+    <link rel="stylesheet" href="../../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../css/style_local.css">
+    <script src="js/tinymce/tinymce.min.js"></script>
     
 </head>
 

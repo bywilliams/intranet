@@ -45,7 +45,7 @@ if(isset($_POST["update"])):
 
     // CHECA SE HOUVE MUDANÇA NO INPUT DA SENHA
     if($password_atual == $password):
-        echo "senhas conferem";
+        //echo "senhas conferem";
         $password_final = $password_atual;
     else:
         $password_final = md5($password);

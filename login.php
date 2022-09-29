@@ -18,15 +18,9 @@ if (!empty($_POST['username']) && !empty($_POST['password'])) {
     $password_err = "Preencha o campo de senha";
 }
 
-// echo $username."<br>";
-// echo $password."<br>";
-
-// echo $username_err."<br>";
-
 // se os campos de erros estiverem vazios, entra no bloco de codigos para checar o usuario e senha
 if (empty($username_err) && empty($password_err)) {
-    // echo "Entrou aqui";
-    // exit();
+  
     $SQL = "SELECT id, nivel_usuario,guest,password FROM usuarios WHERE username = '$username'";
     $result = $conn->query($SQL);
     if ($result->num_rows > 0) {
@@ -37,10 +31,9 @@ if (empty($username_err) && empty($password_err)) {
             $guest = $row["guest"];
         }
     }
-    
+   
     //echo $senha."<br>";
     if ($password === $senha) {
-       
         session_regenerate_id();
         $_SESSION["loggedin"] = TRUE;
         $_SESSION["name"] = $username;
@@ -48,15 +41,15 @@ if (empty($username_err) && empty($password_err)) {
         $_SESSION["nivel"] = $nivel_user;
         $_SESSION["hora_acessou"] = time();
         $_SESSION["guest"] = $guest;
-        echo "<script>alert('Login efetuado, bem vindo')</script>".$username."!";
-        header("location: ./dash/index.php");
+        echo "<script>alert('Login efetuado, bem vindo')</script>";
+        header("location: dashboard.php");
     }else{
-        echo "Usuario ou senha invalidos";
+        echo "<script>alert('usuario ou senha invalidos')</script>";
        
-        header("location: ./index.php");
+        header("location: dashboard.php");
     }
 }else{
-    header("location: ./index.php");
+    header("location: dashboard.php");
 }
 
 $conn->close();

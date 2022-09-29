@@ -29,7 +29,7 @@ if($hora_atual > 0 && $hora_atual <= 12){
 // fim bloco de codigo para saudação
 
 $id = $_SESSION["id"];
-echo $id;
+//echo $id;
 
 $ano = date('Y');
 $data = date('D'); // dia escrito ex: segunda
@@ -78,10 +78,11 @@ TODO: //google search API 'https://google-search3.p.rapidapi.com/api/v1/search/q
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <?php include_once("../helpers/url.php");?>
     
-    <link rel="stylesheet" href="<?=$BASE_URL?>css/bootstrap.min.css">
+    
     <link rel="stylesheet" href="<?=$BASE_URL?>css/bootstrap-icons-1.8.3/bootstrap-icons.css" />
 
     <link rel="stylesheet" href="<?=$BASE_URL?>css/style_local.css">
+    <link rel="stylesheet" href="<?=$BASE_URL?>css/bootstrap.min.css">
     <script src="<?=$BASE_URL?>pages/js/showtime.js" type="text/javascript" async></script>
    
 
@@ -121,7 +122,7 @@ TODO: //google search API 'https://google-search3.p.rapidapi.com/api/v1/search/q
                                     alt="">
                             </a>
                             
-                            <div class="dropdown-menu dropdown-menu-right nav-user-dropdown">
+                            <!-- <div class="dropdown-menu dropdown-menu-right nav-user-dropdown">
                                 <div class="nav-user-info">
                                     <h5 class="mb-0 text-white nav-user-name">William</h5>
                                     <span class="ml-2">Disponivel</span>
@@ -133,7 +134,7 @@ TODO: //google search API 'https://google-search3.p.rapidapi.com/api/v1/search/q
                                 <a class="dropdown-item" href="#"><i class="fas fa-cog mr-2"></i>Setting</a>
                                 <a class="dropdown-item" href="#"><i class="fas fa-power-off mr-2"></i>Logout</a>
 
-                            </div>
+                            </div> -->
                         </li>
                     </ul>
                 </div>
@@ -283,12 +284,12 @@ TODO: //google search API 'https://google-search3.p.rapidapi.com/api/v1/search/q
     </div>
 
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous">
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
         integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
     
     <script>    
         // APARECE DE LOGGOUT SENDO EFETUADO

@@ -14,6 +14,69 @@ if ($_SESSION["nivel"] != 3) {
     header("location: ./error.php");
 }
 
+$lista_meses = [
+    '01'=> "Janeiro",
+    '02'=> "Fevereiro",
+    '03'=> "Março",
+    '04'=> "Abril",
+    '05'=> "Maio",
+    '06'=> "Junho",
+    '07'=> "Julho",
+    '08'=> "Agosto",
+    '09'=> "Setembro",
+    '10'=> "Outubro",
+    '11'=> "Novembro",
+    '12'=> "Dezembro",
+];
+
+$sql_mount = "";
+$status = "";
+$dt_ate = "";
+
+if (isset($_GET["envia_pesquisa"])) {
+    $data = $_GET["dt_ate"];
+    //echo $data;
+
+    $user = $_GET["user"];
+    $status = $_GET["status"];
+ 
+
+    if(!empty($user)){
+        if (!empty($dt_ate) || !empty($satus)) {
+            $sql_mount .= " AND b.id = ".$_GET["user"]. " AND a.cd_user = ".$_GET["user"];
+        }else{
+            $sql_mount .= " AND b.id = ".$_GET["user"]. " AND a.cd_user = ".$_GET["user"];
+        }
+    }
+
+   
+    if(!empty($_GET["dt_ate"])){
+        $dt_ate = $_GET["dt_ate"];
+        if (!empty($user)) {
+            $sql_mount .= " AND MONTH(a.dt_expired) = '".$dt_ate."' ";
+        }else{
+            $sql_mount .= " AND MONTH(a.dt_expired) = '".$dt_ate."' ";
+        }
+    }
+
+    if ($status != null && $status != "") {
+        if (!empty($user) || !empty($dt_ate)) {
+            $sql_mount .= " AND status_task = ".$status;
+        }else{
+            $sql_mount .= " AND status_task = ".$status;
+        }
+    }
+   //echo $sql_mount."<br>";
+  
+   
+    $SQL_Select_Tarefa = "SELECT DISTINCT a.cd_user,a.name_task,a.priority,a.status_task,a.dt_expired,a.created_at,b.nome,b.profile_img,b.id FROM tb_task a,usuarios b WHERE a.cd_user = b.id AND a.cd_user <> 1 ".$sql_mount." ORDER BY a.cd_user";
+    //echo $SQL_Select_Tarefa;
+}else{
+    $SQL_Select_Tarefa = "SELECT DISTINCT a.cd_user,a.name_task,a.priority,a.status_task,a.dt_expired,a.created_at,b.nome,b.profile_img,b.id FROM tb_task a,usuarios b WHERE a.cd_user = b.id AND a.cd_user <> 1 ORDER BY a.cd_user";
+}
+
+
+
 
 ?>
 
@@ -24,40 +87,102 @@ if ($_SESSION["nivel"] != 3) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Usuarios</title>
+    <title>Lista tarefas</title>
     <?php include_once("../../helpers/url.php");?>
-    <script src="<?=$BASE_URL?>../../js/sweetalert.min.js"></script>
+    <script src="../../js/sweetalert.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.9.1/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="../../css/bootstrap.min.css">
-    <link rel="stylesheet" href="<?=$BASE_URL?>../css/bootstrap-icons-1.8.3/bootstrap-icons.css" />
-    <link rel="stylesheet" href="<?=$BASE_URL?>../css/style_local.css">
+    <link rel="stylesheet" href="../../css/style_local.css">
 
 </head>
 
-<body>
+<body style="overflow-x: hidden">
 
     <div class="row">
-   
+
         <div class="col-12">
-            <div class="row">
+            <div class="row ">
                 <div class="col-md-2">
                     <br>
-               <a href="<?=$BASE_URL?>tarefas.php" style="text-decoration: none;"> <i class="bi bi-arrow-return-left" style="font-size: 30px; text-decoration: none;">&nbsp;Voltar</i></a>
+                    <a href="tarefas.php" style="text-decoration: none;"> <i class="bi bi-arrow-return-left"
+                            style="font-size: 30px; text-decoration: none;">&nbsp;Voltar</i></a>
                 </div>
             </div>
-       
+
+            <div class="row">
+               
+              <div class="container">
+                 <div class="col-md-12 col-xl-12">
+                        <h1>Pesquisar por:</h1>
+                        <form action="task_list.php" method="get">
+                            <div class="form-row">
+                                <div class="form-group col-md-3">
+                                    <label for="">Usuario</label>
+                                    <select class="form-control" name="user" id="">
+                                        <option value="">Todos</option>
+<?php
+                                    $query_users = "SELECT * from usuarios WHERE id <> 1";
+                                    $result_users = $conn->query($query_users);
+                                    while ($row_users = $result_users->fetch_assoc()) {
+                                        $nome = $row_users["nome"];
+                                        $id  = $row_users["id"];
+                                        $data = $row_users["dt_expired"];
+?>
+                                            <option value="<?=$id?>" <?php if($id == $user){echo "selected";}?>><?=$nome?></option>
+<?php
+                                    }
+?>                                        
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label for="">Mês</label>
+                                    <select class="form-control" name="dt_ate">
+                                        <option value="">Selecione</option>
+<?php
+                                   $i = 1;
+                                   foreach ($lista_meses as $value) {
+?>
+                                        <option value="<?=$i?>" <?php if ($i == $dt_ate){echo 'selected';}?>><?=$value?></option>
+<?php   
+                                    $i++;    
+                                }
+?>
+                                        
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label for="">Status</label>
+                                    <select class="form-control" name="status" id="">
+                                        <option value="">Selecione</option>
+                                        <option value="0" <?php if ($status == 0){ echo 'selected';}?>>Pendente</option>\
+                                        <option value="1" <?php if ($status == 1){ echo 'selected';}?>>Concluído</option>
+
+                                    </select>
+                                </div>
+                                <div class="col-md-3 pt-2">
+                                <label for=""></label>
+                                <input type="submit" class="form-control btn btn-dark" id="task_name" name="envia_pesquisa" value="Buscar">
+                                </div>
+                            </div>
+                           
+                        </form>
+                    </div>
+                </div>
+            </div>
+
 
             <div class="container">
-
                 <section class="gradient-custom-2">
-                    <div class="container  h-100">
-                        <div class="row d-flex  h-100">
-                            <div class="col-md-12 col-xl-10">
+                    <!-- <div class="container  h-100"> -->
+                        <div class="row h-100">
+                            <div class="col-md-12 col-xl-12">
 
-                                <div class="card">
+                                <div class="card_tarefas">
                                     <div class="card-header p-3" style="background-color: #fff;">
-                                        <h5 class="mb-0"><i class="bi bi-list-task me-3"></i>&nbsp;<strong>Lista de Tarefas da Equipe</strong></h5>
+                                        <h5 class="mb-0"><i class="bi bi-list-task me-3"></i>&nbsp;<strong>Lista de
+                                                Tarefas da Equipe</strong></h5>
                                     </div>
-                                    <div class="card-body" style="background-color: #fff;">
+                                    <div class="card-body" style="background-color: #fff; padding: 0;">
 
                                         <table class="table mb-0">
                                             <thead>
@@ -72,10 +197,7 @@ if ($_SESSION["nivel"] != 3) {
                                             <tbody>
 
                                                 <?php
-                                                $SQL_Select_Tarefa = "SELECT DISTINCT a.cd_user,a.name_task,a.priority,a.status_task,a.dt_expired,a.created_at,b.nome,b.profile_img,b.id FROM tb_task a,usuarios b WHERE a.cd_user = b.id AND a.dt_expired ORDER BY a.cd_user";
-                                                //echo $SQL_Select_Tarefa;
                                                 $t = 0;
-
                                                 $result_tarefas = $conn->query($SQL_Select_Tarefa);
                                                 if ($result_tarefas->num_rows > 0) {
                                                    while ($rowTarefas = $result_tarefas->fetch_assoc()) {
@@ -84,6 +206,7 @@ if ($_SESSION["nivel"] != 3) {
                                                         $profile_img = $rowTarefas["profile_img"];
                                                         $task_id = $rowTarefas["id"];
                                                         $name_task = $rowTarefas["name_task"];
+                                                       
                                                         $priority = $rowTarefas["priority"];
                                                         $status_task = $rowTarefas["status_task"];
                                                         $created_at = $rowTarefas["created_at"];
@@ -118,16 +241,16 @@ if ($_SESSION["nivel"] != 3) {
 
                                                 <tr class="fw-normal">
                                                     <th>
-                                                        <img src="<?=$BASE_URL?>../images/<?=$profile_img;?>"
+                                                        <img src="../images/<?=$profile_img;?>"
                                                             class="shadow-1-strong rounded-circle" alt="avatar 1"
                                                             style="width: 55px; height: 55px;">&nbsp;
                                                         <?php
-                                                            if ($_SESSION["nivel"] == 3) {
-                                                                ?>
+                                                                if ($_SESSION["nivel"] == 3) {
+                                                                    ?>
                                                         <span class="ms-2"><?=$nome?></span>
                                                         <?php
-                                                            }
-                                                        ?>
+                                                                }
+                                                            ?>
 
 
                                                     </th>
@@ -145,14 +268,16 @@ if ($_SESSION["nivel"] != 3) {
                                                     </td>
                                                     <td class="align-middle" style="text-align: center;">
                                                         <?php
-                                                        if (!empty($status_task)) {
+                                                            if (!empty($status_task)) {
+                                                                ?>
+                                                        <a href="#!" title="Feito" id="feito_<?=$t;?>"><i
+                                                                class="bi bi-check-all text-success"
+                                                                style="font-size: 1.5rem;"></i></a>
+                                                        <?php
+                                                            }else{
+                                                                echo "pendente";
+                                                            }
                                                             ?>
-                                                            <a href="#!" title="Feito" id="feito_<?=$t;?>"><i class="bi bi-check-all text-success" style="font-size: 1.5rem;"></i></a>
-                                                            <?php
-                                                        }else{
-                                                            echo "pendente";
-                                                        }
-                                                        ?>
                                                     </td>
                                                 </tr>
                                                 <?php
@@ -175,10 +300,10 @@ if ($_SESSION["nivel"] != 3) {
 
                             </div>
                         </div>
-                    </div>
-                    
-            </div>
+                    <!-- </div> -->
 
+            </div>
+    </div>
 
 
 </body>
