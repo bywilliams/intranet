@@ -71,7 +71,7 @@ if (isset($_POST["aplicar"])) {
     $nr_old_phase = $_POST["nr_phase"]; # phase anterior concluída
     $phase_name = null;
     $update_at = $data_atual;
-    //echo "numero da fase anterior $nr_old_phase";
+    
 
     # se estiver na fase inicial a data de inicio será a data de quando o projeto foi cadastrado
     # Se estiver na etpada 2 em diante pega a data de termino da ultimo fase como inicio da atual 
@@ -88,6 +88,28 @@ if (isset($_POST["aplicar"])) {
                 }
             }
     endif;
+
+    // Imagem da Etapa
+    if(isset($_FILES['files'])):
+        $extensao = strtolower(substr($_FILES['files']['name'], -4)); // Pega nome da extensao do arquivo
+        $nome_imagem = md5(time()) . $extensao; // define nome para o arquivo
+        $diretorio = "./assets/img/portfolio/phases/"; // Define o diretorio para onde o arquivo vai ser enviado
+        $thumb = "./assets/img/portfolio/phases/thumbnail/";
+        echo "$diretorio, $extensao, $nome_imagem";
+
+        $fullPath_image = $diretorio.$nome_imagem;
+        $path_copy_destine = $thumb.$nome_imagem;	
+        
+        if (!file_exists($fullPath_image)) {
+           echo "entrou no if";
+           move_uploaded_file($_FILES['files']['tmp_name'], $diretorio.$nome_imagem); // efetua o upload
+            
+           if (file_exists($fullPath_image)) {
+               copy($fullPath_image, $path_copy_destine);
+           }
+        }
+    endif;
+
 
     //echo "numero da etapada: $phase_id, data de incio da fase atual $dt_start";
     //echo "numero da fase anterior $nr_old_phase";
@@ -127,6 +149,7 @@ if (isset($_POST["aplicar"])) {
         user_id,
         dt_start,
         dt_conclusion,
+        image_phase,
         finish
     )VALUE(
         ".$id_increment.",
@@ -137,6 +160,7 @@ if (isset($_POST["aplicar"])) {
         ".$id.",
         '".$dt_start."',
         '".$data_atual."',
+        '".$nome_imagem."',
         'S'
     )";
     echo $SQL_Phase;
@@ -207,7 +231,7 @@ if (isset($_POST["aplicar"])) {
                     <div class=" rounded shadow-sm" style="background-color: #F6F6F6;">
                     <a href=""><img src="assets/img/portfolio/<?=$img_projeto?>" alt="" class="img-fluid card-img-top"></a>
                         <div class="p-4">
-                            <a href=""><h5> <?=$title;?></h5></a>
+                            <a href="projetos_detalhes.php?id=<?=$id_projeto?>"><h5> <?=$title;?></h5></a>
                             <p class="small text-muted mb-0 my-1"><?=$descricao?></p>
                             <p>Conclusão do projeto:</p>
                             <div class="progress">
@@ -217,17 +241,14 @@ if (isset($_POST["aplicar"])) {
                             </div>
                             <br>
                             <div class="edit_project<?=$t?>" align="center" style="min-height: 50px">
-<?php 
-                            if ($percentual_conclusao < 100) {
-?>
+                            <?php if ($percentual_conclusao < 100): ?>
+
                                 <a href="#!" id="grupos<?=$t;?>" onclick="atualizar(<?=$t?>)"><i class="fa-solid fa-pen-to-square text-success fa-2x"></i></a>
-<?php
-                            }else{
-                                ?>
+                            <?php else: ?>
+
                                <span  data-toggle="tooltip_bt" title="Projeto Concluído"><i class="fa-solid fa-flag-checkered text-success fa-2x"></i></span>
-                                <?php
-                            }
-?>
+                            
+                            <?php endif;?>
                             </div>
                         </div>
                     </div>
@@ -238,18 +259,17 @@ if (isset($_POST["aplicar"])) {
                                 <a href="#!" id="close<?=$t?>"><i  class="fa-solid fa-xmark"></i></a>
                                 </div>
                                 <small style="color: #42855B">Marque a etapa e clique em enviar se estiver concluída</small>
-                                <form method="post" action="">
+                                <form method="post" action=""  enctype="multipart/form-data">
                                     <div class="bloco">
                                         <label for="">Etapa atual:</label>
 <?php
                                             #Checa se já exite alguma etapa em andamento no projeto
-                                            if ($phase) {
-                                                foreach ($lista_etapas as $nr_etapa => $etapa_name) {
+                                            if ($phase):
+                                                foreach ($lista_etapas as $nr_etapa => $etapa_name):
                                                     //echo "$nr_etapa, $phase";
                                                     # se o numero da etapa do for for igual a etapa cadastrada no projeto ou for menor do que a etapa atual do projeto
                                                     # então siginifica que esta ativa em processo de conclusão, sendo assim "checked e disabled
-                                                    if ($nr_etapa == $phase || $nr_etapa < $phase) {
-?>
+                                                    if ($nr_etapa == $phase || $nr_etapa < $phase):?>
                                                         <label>
                                                             <input type="checkbox" class="radio" value="<?=$nr_etapa?>" name="nr_etapa"
                                                          checked disabled/> <?=$etapa_name?>
@@ -257,46 +277,49 @@ if (isset($_POST["aplicar"])) {
 <?php
                                                      # se o numero da etapa for igual ao numero da próxima phase que precisa ser concluída
                                                      # então libera o checkbox da próxima etapa 
-                                                    }else if($nr_etapa == $phase+1){
-?>
+                                                    elseif($nr_etapa == $phase+1):?>
                                                         <label>
                                                             <input type="checkbox" class="radio" value="<?=$nr_etapa?>" name="nr_etapa" id="nr_etapa<?=$t?>"
                                                             <?php if($nr_etapa > $next_phase){echo "";}?> />&nbsp;<span style="background-color: #6FEDD6; color: #000;"><?=$etapa_name?></span>
                                                         </label>
 <?php
-                                                    }else{ # caso contratio são etapas mais adiantes que ainda não estão liberadas
+                                                    else: # caso contratio são etapas mais adiantes que ainda não estão liberadas
 ?>
                                                         <label>
                                                             <input type="checkbox" class="radio" value="<?=$nr_etapa?>" name="nr_etapa"
                                                             <?php if($nr_etapa > $next_phase){echo "disabled";}?>/> <?=$etapa_name?>
                                                         </label>
 <?php
-                                                    }
+                                                    endif;
                                                     $next_phase = $phase +1;
-                                                }
-                                            }else{ # se nenhuma etapa ainda foi iniciada todos os checkbox são liberados
-                                                foreach ($lista_etapas as $nr_etapa => $etapa_name) {
+                                                endforeach;
+                                            else: # se nenhuma etapa ainda foi iniciada todos os checkbox são liberados
+                                                foreach ($lista_etapas as $nr_etapa => $etapa_name):
                                                     //echo "$nr_etapa";
-                                                    if ($nr_etapa == 1) {
+                                                    if ($nr_etapa == 1):
 ?>
                                                         <label>
                                                             <input type="checkbox" class="radio" id="nr_etapa<?=$t?>" value="<?=$nr_etapa?>"  name="nr_etapa"/>&nbsp;<span style="background-color: #6FEDD6; color: #000;"><?=$etapa_name?></span>
                                                         </label>
 <?php
-                                                    }else{
+                                                    else:
 ?>
                                                          <label>
                                                             <input type="checkbox" class="radio" id="nr_etapa<?=$t?>" value="<?=$nr_etapa?>"  name="nr_etapa" disabled/> <?=$etapa_name?>
                                                         </label>
 <?php
-                                                    }
-                                                }
-                                            }                                            
+                                                    endif;
+                                                endforeach;
+                                            endif;                                            
 ?>      
                                     </div>
                                     <div class="bloco">
-                                    <p><label for="">Descrição da Etapa:</label>
-                                        <textarea name="descricao" rows="3" cols="27" required> </textarea>   </p>  
+                                        <div class="custom-file" style="margin-bottom: 10px">
+                                            <input type="file" name="files" multiple class="custom-file-input form-control" id="customFile">
+                                            <label class="custom-file-label" for="customFile">Imagem</label>
+                                        </div>
+                                        <p><label for="">Descrição da Etapa:</label>
+                                        <textarea name="descricao" rows="3" required style="width: 100%"> </textarea>   </p>  
                                         <label for="">Conclusão <span id="resultado<?=$t?>"><?=$percentual_conclusao?></span>%:</label>
                                         <!-- <input type="range" id="range<?=$t?>" class="myRange" name="range" style="width:100%" value="<?=$percentual_conclusao?>" disable> -->
                                         <input type="hidden" name="id_projeto" value="<?=$id_projeto?>">

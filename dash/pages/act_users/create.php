@@ -8,12 +8,12 @@ if (session_status() !== PHP_SESSION_ACTIVE) {
 
 // clicando em salvar(form cadastro) pega os inputs e efetua o upload do arquivo para  a pasta de destino
 if(isset($_POST["salvar"])):
+   
     $nome_completo = $_POST["nome"];
     $email = $_POST["email"];
     $usuario = $_POST["usuario"];
     $password = md5($_POST["password"]);
     $nivel = $_POST["nivel"];
-
 
     if(isset($_FILES['imagem'])):
 		$extensao = strtolower(substr($_FILES['imagem']['name'], -4)); // Pega nome da extensao do arquivo

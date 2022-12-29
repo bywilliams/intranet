@@ -32,101 +32,150 @@ endif;
 </head>
 
 <style>
-    .list-group-item{
-        margin-right: 4px;
-    }
+.list-group-item {
+    margin-right: 4px;
+}
 </style>
 
 <body>
-<div class="container-fluid dashboard-content">
-    <h1>Apostilas e PDFs</h1>
-    <div class="container d-flex ">
+    <div class="container-fluid dashboard-content">
+        <h1>Apostilas e PDFs</h1>
+        <div class="container d-flex ">
 
-        <ul class="list-group mt-5 text-black" style="flex-direction: row;">
-            <li class="list-group-item d-flex" style="width: 100%;">
 
-                <div class="d-flex flex-row">
-                <i class="fa-solid fa-folder fa-3x" style=" color: #FFCA28;"></i>
-                    <div class="ml-2">
-                        <h6 class="mb-0">Curso Git</h6>
-                        <div class="about">
-                            <span>22 Arquivos</span>
-                            <span>Jan 21, 2020</span>
+            <div class="container py-2 mt-4 mb-4">
+                <!-- timeline item 1 -->
+                <div class="row no-gutters">
+                    <div class="col-sm">
+                        <!--spacer-->
+                    </div>
+                    <!-- timeline item 1 center dot -->
+                    <div class="col-sm-1 text-center flex-column d-none d-sm-flex">
+                        <div class="row h-50">
+                            <div class="col">&nbsp;</div>
+                            <div class="col">&nbsp;</div>
+                        </div>
+                        <h5 class="m-2">
+                            <span class="badge badge-pill bg-light border">&nbsp;</span>
+                        </h5>
+                        <div class="row h-50">
+                            <div class="col border-right">&nbsp;</div>
+                            <div class="col">&nbsp;</div>
+                        </div>
+                    </div>
+                    <!-- timeline item 1 event content -->
+                    <div class="col-sm py-2">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="float-right text-muted small">Jan 9th 2019 7:00 AM</div>
+                                <h4 class="card-title">Day 1 Orientation</h4>
+                                <p class="card-text">Welcome to the campus, introduction and get started with the tour.
+                                </p>
+                            </div>
                         </div>
                     </div>
                 </div>
-
-
-            </li>
-
-            <li class="list-group-item d-flex" style="width: 100%;">
-
-                <div class="d-flex flex-row">
-                <i class="fa-solid fa-folder fa-3x" style=" color: #FFCA28;"></i>
-                    <div class="ml-2">
-                        <h6 class="mb-0">Curso Bootstrap</h6>
-                        <div class="about">
-                            <span>62 Arquivos</span>
-                            <span>Jan 22, 2020</span>
+                <!--/row-->
+                <!-- timeline item 2 -->
+                <div class="row no-gutters">
+                    <div class="col-sm py-2">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="float-right small">Jan 10th 2019 8:30 AM</div>
+                                <h4 class="card-title">Day 2 Sessions</h4>
+                                <p class="card-text">Sign-up for the lessons and speakers that coincide with your course
+                                    syllabus. Meet and greet with instructors.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-1 text-center flex-column d-none d-sm-flex">
+                        <div class="row h-50">
+                            <div class="col border-right">&nbsp;</div>
+                            <div class="col">&nbsp;</div>
+                        </div>
+                        <h5 class="m-2">
+                            <span class="badge badge-pill bg-light border">&nbsp;</span>
+                        </h5>
+                        <div class="row h-50">
+                            <div class="col border-right">&nbsp;</div>
+                            <div class="col">&nbsp;</div>
+                        </div>
+                    </div>
+                    <div class="col-sm">
+                        <!--spacer-->
+                    </div>
+                </div>
+                <!--/row-->
+                <!-- timeline item 3 -->
+                <div class="row no-gutters">
+                    <div class="col-sm">
+                        <!--spacer-->
+                    </div>
+                    <div class="col-sm-1 text-center flex-column d-none d-sm-flex">
+                        <div class="row h-50">
+                            <div class="col border-right">&nbsp;</div>
+                            <div class="col">&nbsp;</div>
+                        </div>
+                        <h5 class="m-2">
+                            <span class="badge badge-pill bg-light border">&nbsp;</span>
+                        </h5>
+                        <div class="row h-50">
+                            <div class="col border-right">&nbsp;</div>
+                            <div class="col">&nbsp;</div>
+                        </div>
+                    </div>
+                    <div class="col-sm py-2">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="float-right text-muted small">Jan 11th 2019 8:30 AM</div>
+                                <h4 class="card-title">Day 3 Sessions</h4>
+                                <p>Shoreditch vegan artisan Helvetica. Tattooed Codeply Echo Park Godard kogi, next
+                                    level irony ennui twee squid fap selvage. Meggings flannel Brooklyn literally small
+                                    batch, mumblecore PBR try-hard kale chips. Brooklyn vinyl lumbersexual
+                                    bicycle rights, viral fap cronut leggings squid chillwave pickled gentrify mustache.
+                                </p>
+                            </div>
                         </div>
                     </div>
                 </div>
-
-
-            </li>
-
-            <li class="list-group-item d-flex" style="width: 100%;">
-
-                <div class="d-flex flex-row">
-                <i class="fa-solid fa-folder fa-3x" style=" color: #FFCA28;"></i>
-                    <div class="ml-2">
-                        <h6 class="mb-0">Curso Linux</h6>
-                        <div class="about">
-                            <span>2 Arquivos</span>
-                            <span>Jan 29, 2020</span>
+                <!--/row-->
+                <!-- timeline item 4 -->
+                <div class="row no-gutters">
+                    <div class="col-sm py-2">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="float-right text-muted small">Jan 12th 2019 11:30 AM</div>
+                                <h4 class="card-title">Day 4 Wrap-up</h4>
+                                <p>Join us for lunch in Bootsy's cafe across from the Campus Center.</p>
+                            </div>
                         </div>
                     </div>
-                </div>
-
-
-            </li>
-
-            <li class="list-group-item d-flex" style="width: 100%;">
-
-                <div class="d-flex flex-row">
-                <i class="fa-solid fa-folder fa-3x" style=" color: #FFCA28;"></i>
-                    <div class="ml-2">
-                        <h6 class="mb-0">Curso Laravel</h6>
-                        <div class="about">
-                            <span>12 Arquivos</span>
-                            <span>Jan 29, 2020</span>
+                    <div class="col-sm-1 text-center flex-column d-none d-sm-flex">
+                        <div class="row h-50">
+                            <div class="col border-right">&nbsp;</div>
+                            <div class="col">&nbsp;</div>
+                        </div>
+                        <h5 class="m-2">
+                            <span class="badge badge-pill bg-light border">&nbsp;</span>
+                        </h5>
+                        <div class="row h-50">
+                            <div class="col">&nbsp;</div>
+                            <div class="col">&nbsp;</div>
                         </div>
                     </div>
-                </div>
-
-
-            </li>
-
-            <li class="list-group-item d-flex" style="width: 100%;">
-
-                <div class="d-flex flex-row">
-                <i class="fa-solid fa-folder fa-3x" style=" color: #FFCA28;"></i>
-                    <div class="ml-2">
-                        <h6 class="mb-0">Curso React</h6>
-                        <div class="about">
-                            <span>2 Arquivos</span>
-                            <span>Jan 29, 2020</span>
-                        </div>
+                    <div class="col-sm">
+                        <!--spacer-->
                     </div>
                 </div>
+                <!--/row-->
+            </div>
 
+            <hr>
 
-            </li>
-
-        </ul>
-
+        </div>
+        <!--container-->
     </div>
-</div>
+    </div>
 
 
 </body>

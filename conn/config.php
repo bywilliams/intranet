@@ -2,10 +2,10 @@
 
 
 // detalhes da configuração com o banco de dados
-$server = 'us-cdbr-east-06.cleardb.net';
-$user = 'bd1514d39ae23d';
-$password = '9bff942a';
-$db = 'heroku_68d1784e4e5afd8';
+$server = 'localhost';
+$user = 'root';
+$password = '';
+$db = 'intranet';
 
 //conexão com o banco de dados 
 $conn = new mysqli($server, $user, $password, $db);
@@ -18,7 +18,7 @@ if($conn === false){
     //echo "Sucesso";
 }
 
-// $conn->close();
+//  $conn->close();
 
 
 

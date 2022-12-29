@@ -177,7 +177,10 @@ TODO: //google search API 'https://google-search3.p.rapidapi.com/api/v1/search/q
                     <div class="content">
                         <ul>
                             <li style="list-style-type: none;">
-                                <a href="dash/pages/blog/index.php" target="myFrame"><span class="fa-solid fa-arrow-up-right-from-square mr-3"></span>Acessar</a>
+                                <a href="dash/pages/blog/index.php" target="myFrame"><span class="fa-solid fa-arrow-up-right-from-square mr-3"></span>Acessar Blog</a>
+                            </li>
+                            <li style="list-style-type: none;">
+                                <a href="dash/pages/list_posts.php" target="myFrame"><span class="fa-solid fa-list mr-3"></span>Lista de Posts</a>
                             </li>
                             <li style="list-style-type: none;">
                                 <a href="dash/pages/post_blog.php" target="myFrame"><span class="fa-solid fa-plus mr-3"></span>Criar Post</a>

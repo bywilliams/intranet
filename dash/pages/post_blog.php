@@ -82,7 +82,7 @@ $result_category = $conn->query($query_category);
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="form_email">Imagem thumbnail</label>
-                                    <input type="file" name="file" class="form-control" accept="image/png,image/jpeg,image/jpg" />
+                                    <input type="file" name="file" class="form-control" accept="image/png,image/jpeg,image/jpg" required/>
                                 </div>
                             </div>
                         </div>

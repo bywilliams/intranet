@@ -31,6 +31,14 @@ if ($_SESSION["nivel"] != 3) {
     <link rel="stylesheet" href="../../css/bootstrap.min.css">
     <link rel="stylesheet" href="../../css/style_local.css">
 
+    <style>
+        #contactChoice1,
+        #contactChoice2,
+        #contactChoice3 {
+            margin: 0 5px;
+        }
+    </style>
+
 </head>
 
 <body style="overflow-x: hidden;">
@@ -144,18 +152,20 @@ if ($_SESSION["nivel"] != 3) {
 
                                 <div class="form-row">
                                     <div class="form-group col-md-4">
-                                        <label for="inputState">Nivel de Acesso:</label>
-                                        <input type="radio" id="contactChoice1" name="nivel_update" value="1"
-                                            <?php if($nivel == 1){echo "checked";}?>>
-                                        <label for="contactChoice1">1</label>
+                                        <div class="acesso_nr d-flex">
+                                            <label for="inputState">Nivel de Acesso:</label>
+                                            <input type="radio" id="contactChoice1" name="nivel_update" value="1"
+                                                <?php if($nivel == 1){echo "checked";}?>>
+                                            <label for="contactChoice1">1</label>
 
-                                        <input type="radio" id="contactChoice2" name="nivel_update" value="2"
-                                            <?php if($nivel == 2){echo "checked";}?>>
-                                        <label for="contactChoice2">2</label>
+                                            <input type="radio" id="contactChoice2" name="nivel_update" value="2"
+                                                <?php if($nivel == 2){echo "checked";}?>>
+                                            <label for="contactChoice2">2</label>
 
-                                        <input type="radio" id="contactChoice3" name="nivel_update" value="3"
-                                            <?php if($nivel == 3){echo "checked";}?>>
-                                        <label for="contactChoice3">3</label>
+                                            <input type="radio" id="contactChoice3" name="nivel_update" value="3"
+                                                <?php if($nivel == 3){echo "checked";}?>>
+                                            <label for="contactChoice3">3</label>
+                                        </div>
                                         <p class="niveis">Nivel 1: Usuario <br />
                                             Nivel 2: Administrador <br />
                                             Nivel 3: Owner (Dono)</p>
@@ -232,15 +242,18 @@ if ($_SESSION["nivel"] != 3) {
 
                     <div class="form-row">
                         <div class="form-group col-md-4">
-                            <label for="inputState">Nivel de Acesso:</label>
-                            <input type="radio" id="contactChoice1" name="nivel" value="1" required>
-                            <label for="contactChoice1">1</label>
+                            <div class="acesso_nr d-flex">
+                                <label for="inputState">Nivel de Acesso:</label>
+                                <input type="radio" id="contactChoice1" name="nivel" value="1" required>
+                                <label for="contactChoice1">1</label>
 
-                            <input type="radio" id="contactChoice2" name="nivel" value="2" required>
-                            <label for="contactChoice2">2</label>
+                                <input type="radio" id="contactChoice2" name="nivel" value="2" required>
+                                <label for="contactChoice2">2</label>
 
-                            <input type="radio" id="contactChoice3" name="nivel" value="3" required>
-                            <label for="contactChoice3">3</label>
+                                <input type="radio" id="contactChoice3" name="nivel" value="3" required>
+                                <label for="contactChoice3">3</label>
+                            </div>
+                           
                             <p class="niveis">Nivel 1: Usuario <br />
                                 Nivel 2: Administrador <br />
                                 Nivel 3: Owner (Dono)</p>
