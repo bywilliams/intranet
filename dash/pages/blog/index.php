@@ -2,6 +2,15 @@
 
 require_once ("../../../conn/config.php");
 
+//Iniciando a sessão:
+if (session_status() !== PHP_SESSION_ACTIVE) {
+    session_start();
+}
+
+if($_SESSION["loggedin"] != true): 
+    header("location: ./error.php");
+endif;
+
 # trazendo as categorias para o input
 $query_category = "SELECT * FROM cat_blog ORDER BY id ASC";
 $result_category = $conn->query($query_category);

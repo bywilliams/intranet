@@ -8,7 +8,7 @@ if (session_status() !== PHP_SESSION_ACTIVE) {
 
 // clicando em salvar(form cadastro) pega os inputs e efetua o upload do arquivo para  a pasta de destino
 if(isset($_POST["salvar"])):
-   
+    
     $nome_completo = $_POST["nome"];
     $email = $_POST["email"];
     $usuario = $_POST["usuario"];
@@ -21,7 +21,6 @@ if(isset($_POST["salvar"])):
 		$diretorio = "../../images/"; // Define o diretorio para onde o arquivo vai ser enviado
 
        // echo "$extensao , $nome_imagem";
-       
 		move_uploaded_file($_FILES['imagem']['tmp_name'], $diretorio.$nome_imagem); // efetua o upload
 	endif;
 

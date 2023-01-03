@@ -1,13 +1,11 @@
 <?php 
 require_once ("../../conn/config.php");
+require_once ("inc/valida_guest.php");
 
 //Iniciando a sessão:
 if (session_status() !== PHP_SESSION_ACTIVE) {
     session_start();
 }
-
-
-require_once ("inc/valida_guest.php");
 
 if($_SESSION["loggedin"] != true): 
     header("location: ./error.php");
@@ -50,7 +48,6 @@ curl_close($ch);
 <body>
     
     <div class="container-fluid dashboard-content">
-       
             <h1 class="mb-5">Notícias</h1>
 
             <?php
@@ -93,8 +90,6 @@ curl_close($ch);
                     }
                 }
                 ?>
-
-       
     </div>
 </body>
 

@@ -291,7 +291,7 @@ $mes_atual = $mes_extenso["$mes"];
                                 }
 
                                 
-                                if ($name_tasks != "") {
+                                if (!empty($name_tasks)) {
 ?>
                                 <tbody>
                                     <tr>
@@ -299,11 +299,17 @@ $mes_atual = $mes_extenso["$mes"];
                                     </tr>
                                 </tbody>
 <?php
-                                 }else{
-                                    echo "Não há tarefas pendentes";
                                  }
                                 $i++;
                             }
+                        }else {
+                            ?>
+                                <tbody>
+                                    <tr>
+                                        <td class="badge" style="color: #000; border-top: none;">Nenhuma tarefa cadastrada</td>
+                                    </tr>
+                                </tbody>
+<?php
                         }
 ?>
                 </table>
@@ -319,7 +325,7 @@ $mes_atual = $mes_extenso["$mes"];
 <?php
        $p = 1;
        $percent1 = $percent2 = $percent3 = 0;
-       $title1 = $title1 = $title2 = $title3 = "";
+       $title1 = $title2 = $title3 = "";
        if ($result_projetos_pendentes->num_rows > 0) {
         
             while ($row_projetos = $result_projetos_pendentes->fetch_assoc()) {
@@ -368,6 +374,8 @@ $mes_atual = $mes_extenso["$mes"];
 <?php
             $p++;
             }
+       }else {
+        echo "<h2>Nenhum projeto cadastrado</h2>";
        }
 ?>
     </div>

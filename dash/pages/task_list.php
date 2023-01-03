@@ -159,7 +159,7 @@ if (isset($_GET["envia_pesquisa"])) {
 
                                     </select>
                                 </div>
-                                <div class="col-md-3 pt-2">
+                                <div class="col-md-3 pt-4">
                                 <label for=""></label>
                                 <input type="submit" class="form-control btn btn-dark" id="task_name" name="envia_pesquisa" value="Buscar">
                                 </div>

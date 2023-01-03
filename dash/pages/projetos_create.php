@@ -7,48 +7,48 @@ if (session_status() !== PHP_SESSION_ACTIVE) {
     session_start();
 }
 
+if($_SESSION["loggedin"] != true): 
+    header("location: ./error.php");
+endif;
+
 
 if (isset($_POST['enviar'])) {
+    
     $titulo = $_POST['titulo'];
     $descricao = $_POST['descricao'];
     $range = $_POST['range'];
     $user_id = $_POST['user_id'];
-   
+
     if(isset($_FILES['filename'])):
-        echo "existe arquivo<br>";
+        //echo "arquivo existe <br>";
 		$extensao = strtolower(substr($_FILES['filename']['name'], -4)); // Pega nome da extensao do arquivo
 		$nome_imagem = md5(time()) . $extensao; // define nome para o arquivo
 		$diretorio = "assets/img/portfolio/"; // Define o diretorio para onde o arquivo vai ser enviado
 
-        if (file_exists($diretorio)) {
-            echo "diretorio existe<br>";
-        }else{
-            echo "diretorio não existe";
-        }
-       
-		move_uploaded_file($_FILES['filename']['tmp_name'], $diretorio.$nome_imagem); // efetua o upload
-	endif;
+       // echo "$extensao , $nome_imagem";
+		if(move_uploaded_file($_FILES['filename']['tmp_name'], $diretorio.$nome_imagem)): // efetua o upload
+            //echo "sucesso <br>";
+        else:
+            echo "falha <br>";
+        endif;
+    endif;
     //echo "$titulo , $nome_imagem , $descricao, $range, $user_id";
-
 
     $SQL_project = "INSERT INTO projects (
         user_id, 
         title,
         description,
         file_name,
-        percent_conclusion,
         created_at)
         VALUES(
             ".$user_id.",
             '".$titulo."',
             '".$descricao."',
             '".$nome_imagem."',
-            ".$range.",
             now()          
         )
     ";
-
-    //echo $SQL_Insert;
+    //echo $SQL_project;
     if($result_project = mysqli_query($conn,$SQL_project)):
         echo "<script>
         alert('Projeto cadastrado com sucesso!'); location= '../pages/projetos_create.php';
@@ -150,12 +150,12 @@ if (isset($_POST['enviar'])) {
                         </div>
                         <br>
                         <br>
-                        <div class="form-group">
+                        <!-- <div class="form-group">
                             <label for="">Porcentagem de conclusão:</label>
                             <h1 align="center" style="margin: 1rem 0;"><span class="text-primary" id="resultado">0%</span></h1>
                             <input type="range" id="range" name="range" class="custom-range" value="0" min="0" max="100" required>
                             
-                        </div>
+                        </div> -->
                         <div class="form-group">
                             <input type="hidden" name="user_id" value="<?=$_SESSION["id"]?>">
                             <button type="submit" name="enviar" class="btn btn-success btn-lg">Enviar</button>
@@ -178,17 +178,13 @@ if (isset($_POST['enviar'])) {
                     document.querySelector('#custom-file-label').innerHTML = file;
                 }
             }
-           
-           
                 // Porcentagem em Tempo real
                 let $range = document.querySelector('#range'),
                     $value = document.querySelector('#resultado');
                 $range.addEventListener('input', function(){
                     $value.textContent = this.value+"%";
                 });
-           
             
-          
         </script>
     </body>
 </html>

@@ -1,11 +1,14 @@
 <?php
 require_once ("conn/config.php");
-require_once ("dash/pages/inc/valida_guest.php");
 
 //Iniciando a sessão:
 if (session_status() !== PHP_SESSION_ACTIVE) {
     session_start();
 }
+
+require_once ("dash/pages/inc/valida_guest.php");
+
+
 
 
 
@@ -86,22 +89,20 @@ TODO: //google search API 'https://google-search3.p.rapidapi.com/api/v1/search/q
 
     <style>
 .collapsible {
- 
-  
-  cursor: pointer;
-  padding: 18px;
- width: 100%;
-  border: none;
-  text-align: left;
-  outline: none;
-  font-size: 15px;
+    cursor: pointer;
+    padding: 18px;
+    width: 100%;
+    border: none;
+    text-align: left;
+    outline: none;
+    font-size: 15px;
 }
 
 .content {
-  padding: 0 18px;
-  display: none;
-  overflow: hidden;
-  background-color: #003865;
+    padding: 0 18px;
+    display: none;
+    overflow: hidden;
+    background-color: #003865;
 }
     </style>
 

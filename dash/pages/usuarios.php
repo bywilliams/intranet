@@ -214,7 +214,7 @@ if ($_SESSION["nivel"] != 3) {
                 <span class="close">&times;</span>
             </div>
             <div class="modal-body">
-                <form method="post" action="act_users/create.php" enctype="multipart/form-data">
+                <form action="act_users/create.php" method="post"  enctype="multipart/form-data">
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="inputEmail4">Nome Completo</label>

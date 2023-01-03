@@ -52,22 +52,28 @@ Para desenvolver  esta aplicação web usei como Editor de código o VS Code poi
 - Campo de Busca interna
 - Tudo acontece na index da dashboard através de um Iframe
 
-# Imagem da Aplicação
+# Gif da Aplicação
 Agora será mostrado como esta a Intranet atualmente.
 
-![Alt ou título da imagem](layout/intranet_final.gif)
+![Alt ou título da imagem](layout/intranet_update.gif)
 &nbsp;
 
 ### Instalação
 - Clone este repositorio atráves do terminal, VS Code 
 
 
-## Acompanhe o resultado parcial deste projeto no Youtube
-Aplicação online no Heroku
-usuario: convidado
-senha: convidado321
+## Acompanhe o resultado parcial deste projeto faça um teste
+Você pode testar este projeto efetuando login com os seguintes dados:
 
-> Intranet -> [Aplicação no Heroku](https://intranetbywilliams.herokuapp.com)
+usuario: roboto
+senha: roboto123
+
+Pode cadastrar o que quiser, não se preocupe ao efetuar o logout ou ao expirar a sessão todos os registros efetuados serão deletados automáticamente.
+
+> Intranet Online -> [Acessar](http://phpintranet.infinityfreeapp.com/)
+
+## Acompanhe também o resultado parcial deste projeto  no Youtube
+> Projeto Intranet -> [Ver no youtube](https://www.youtube.com/watch?v=SSyommgWNSE&ab_channel=WilliamKyodev)
 
 ## Autor
 
