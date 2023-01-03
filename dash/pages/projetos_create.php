@@ -39,12 +39,14 @@ if (isset($_POST['enviar'])) {
         title,
         description,
         file_name,
+        percent_conclusion,
         created_at)
         VALUES(
             ".$user_id.",
             '".$titulo."',
             '".$descricao."',
             '".$nome_imagem."',
+            0,
             now()          
         )
     ";
