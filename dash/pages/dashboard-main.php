@@ -9,12 +9,11 @@ if (session_status() !== PHP_SESSION_ACTIVE) {
     session_start();
 }
 
+if ($_SESSION["loggedin"] == false) {
+    header("location: error.php");
+}
 
 $id = $_SESSION['id'];
-
-if($_SESSION["loggedin"] != true): 
-    header("location: ./error.php");
-endif;
 
 // PEGA O HORÁRIO ATUAL DE ACORDO COM O TIMEZONE DE SP
 $timezone = new DateTimeZone('America/Sao_Paulo');
@@ -265,7 +264,7 @@ $mes_atual = $mes_extenso["$mes"];
                         <tr style="border-top: none">
 
                             <th scope="col">
-                                <h4>Últimas Tarefas Cadatradas</h4>
+                                <h4>Últimas Tarefas Cadastradas</h4>
                             </th>
 
                         </tr>

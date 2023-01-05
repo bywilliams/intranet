@@ -8,7 +8,7 @@ if (session_status() !== PHP_SESSION_ACTIVE) {
 }
 
 if($_SESSION["loggedin"] != true): 
-    header("location: ./error.php");
+    header("location: ../error.php");
 endif;
 
 # trazendo as categorias para o input

@@ -481,6 +481,32 @@ label {
 
 /* Fim estilo projetos */
 
+/* Botão sair */
+.loggout {
+    background-color: #850000 !important;
+    color: #fff;
+    font-weight: bold;
+}
+
+
+/* Collapse Menu Dashboard*/
+.collapsible {
+    cursor: pointer;
+    padding: 18px;
+    width: 100%;
+    border: none;
+    text-align: left;
+    outline: none;
+    font-size: 15px;
+}
+
+.content {
+    padding: 0 18px;
+    display: none;
+    overflow: hidden;
+    background-color: #003865;
+}
+
 @media screen and (max-width: 425px) {
     .container {
         -webkit-perspective: 2000;

@@ -46,10 +46,8 @@ if (empty($username_err) && empty($password_err)) {
     }else{
         echo "<script>alert('usuario ou senha invalidos')</script>";
        
-        header("location: dashboard.php");
+        header("location: index.php");
     }
-}else{
-    header("location: dashboard.php");
 }
 
 $conn->close();

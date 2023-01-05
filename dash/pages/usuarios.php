@@ -1,17 +1,20 @@
 <?php
 require_once ("../../conn/config.php");
-
+require_once ("inc/valida_guest.php");
 //Iniciando a sessão:
 if (session_status() !== PHP_SESSION_ACTIVE) {
     session_start();
 }
-require_once ("inc/valida_guest.php");
+
+if ($_SESSION["loggedin"] == false) {
+    header("location: error.php");
+}
 
 $id = $_SESSION['id'];
 
 
 if ($_SESSION["nivel"] != 3) {
-    header("location: ./error.php");
+    header("location: error.php");
 }
 
 ?>

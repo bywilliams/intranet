@@ -1,6 +1,6 @@
 <?php
 require_once ("conn/config.php");
-
+require_once ("dash/pages/inc/valida_guest.php");
 
 //Iniciando a sessão:
 if (session_status() !== PHP_SESSION_ACTIVE) {
@@ -8,6 +8,7 @@ if (session_status() !== PHP_SESSION_ACTIVE) {
 }
 
 if ($_SESSION["loggedin"] == false) {
+    echo "sessão expirada";
     header("location: index.php");
 }
 
@@ -41,6 +42,15 @@ $h = date('H');
 $i = date('i');
 $s = date('s');
 
+
+// FAZ LOGGOUT AO CLICAR EM SAIR DA DASHBOARD
+if (isset($_GET["loggout"])) {
+    unset($_SESSION["login"]);
+    session_destroy();
+    header("location: index.php");
+}
+
+
 $username = $_SESSION["name"];
 $nome = "";
 
@@ -67,11 +77,30 @@ TODO: //google search API 'https://google-search3.p.rapidapi.com/api/v1/search/q
     <title>Intranet</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
     <link rel="stylesheet" href="../../css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/style_local.css">
+
+    <style>
+.collapsible {
+    cursor: pointer;
+    padding: 18px;
+    width: 100%;
+    border: none;
+    text-align: left;
+    outline: none;
+    font-size: 15px;
+}
+
+.content {
+    padding: 0 18px;
+    display: none;
+    overflow: hidden;
+    background-color: #003865;
+}
+    </style>
 
 </head>
 <?php require_once ("dash/pages/inc/valida_guest.php")?>
@@ -170,10 +199,10 @@ TODO: //google search API 'https://google-search3.p.rapidapi.com/api/v1/search/q
                     </div>
                 </li>
                 <li>
-                    <a href="dash/pages/info.php" id="myFrame" target="myFrame"><span class="fa-solid fa-circle-info mr-3"></span> Informações</a>
+                    <a href="dash/pages/info.php" target="myFrame"><span class="fa-solid fa-circle-info mr-3"></span> Informações</a>
                 </li>
                 <li>
-                    <a href="?loggout" class="loggout" onclick="return sair()"><span class="fa fa-sign-out mr-3"></span> Sair</a>
+                    <a href="?loggout" id="loggout" onclick="sair()"><span class="fa fa-sign-out mr-3"></span> Sair</a>
                 </li>
             </ul>
 
@@ -189,8 +218,35 @@ TODO: //google search API 'https://google-search3.p.rapidapi.com/api/v1/search/q
     <script src="js/popper.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/main.js"></script>
-    <script src="js/sweetalert.min.js"></script>
     <script src="dash/pages/js/showtime.js" type="text/javascript" async></script>
+    <script src="js/sweetalert.min.js"></script>
+
+<script>
+      // APARECE DE LOGGOUT SENDO EFETUADO
+    function sair() {
+        //alert("clicou sair");
+        var logout = document.getElementById('loggout').value;
+            
+            //console.log(username + password);
+    
+        if (logout != "") {
+            //alert("clicou sair");
+            Swal.fire("Preencha o campo usuário!");
+        }
+        // alert('Saindo aguarde um instante ... ');
+    }
+
+    // retornar ao topo da página
+    function topo() {
+        parent.scroll(0, 0);
+    }
+
+    // var convidado = document.getElementById('convidado').value;
+    // if (convidado != "") {
+    //     alert('Saindo');
+    // }     
+</script>
+
     <script>
     var coll = document.getElementsByClassName("collapsible");
     var i;
@@ -206,15 +262,6 @@ TODO: //google search API 'https://google-search3.p.rapidapi.com/api/v1/search/q
             }
         });
     }
-
-    function topo() {
-        parent.scroll(0, 0);
-    }
-
-    var convidado = document.getElementById('convidado').value;
-    if (convidado != "") {
-        alert('Saindo');
-    }     
     </script>
     <script>
     // Tooltip menu 
