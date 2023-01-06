@@ -16,6 +16,10 @@ date_default_timezone_set('America/Sao_Paulo');
 
 $id = $_SESSION['id'];
 
+$SQL_Select_Tarefa = "SELECT t.id, t.cd_user, t.name_task, t.priority, t.status_task, t.created_at, t.dt_expired, t.designado_por, u.profile_img, u.nome FROM tb_task AS t INNER JOIN usuarios AS u ON t.cd_user = u.id WHERE cd_user = $id ORDER BY priority ASC";
+$t = 0;
+$result_tarefas = $conn->query($SQL_Select_Tarefa);
+
 ?>
 
 <!DOCTYPE html>
@@ -74,11 +78,6 @@ $id = $_SESSION['id'];
                             <tbody>
 
                                 <?php
-                                $SQL_Select_Tarefa = "SELECT t.id, t.cd_user, t.name_task, t.priority, t.status_task, t.created_at, t.dt_expired, t.designado_por, u.profile_img, u.nome FROM tb_task AS t INNER JOIN usuarios AS u ON t.cd_user = u.id WHERE cd_user = $id ORDER BY priority ASC";
-                               
-                                $t = 0;
-
-                                $result_tarefas = $conn->query($SQL_Select_Tarefa);
                                 if ($result_tarefas->num_rows > 0) {
                                    while ($rowTarefas = $result_tarefas->fetch_assoc()) {
                                         $t++;

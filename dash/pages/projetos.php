@@ -95,13 +95,13 @@ if (isset($_POST["aplicar"])) {
         $nome_imagem = md5(time()) . $extensao; // define nome para o arquivo
         $diretorio = "./assets/img/portfolio/phases/"; // Define o diretorio para onde o arquivo vai ser enviado
         $thumb = "./assets/img/portfolio/phases/thumbnail/";
-        echo "$diretorio, $extensao, $nome_imagem";
+        //echo "$diretorio, $extensao, $nome_imagem";
 
         $fullPath_image = $diretorio.$nome_imagem;
         $path_copy_destine = $thumb.$nome_imagem;	
         
         if (!file_exists($fullPath_image)) {
-           echo "entrou no if";
+           //echo "entrou no if";
            move_uploaded_file($_FILES['files']['tmp_name'], $diretorio.$nome_imagem); // efetua o upload
             
            if (file_exists($fullPath_image)) {

@@ -53,7 +53,7 @@ if (isset($_POST['enviar'])) {
     //echo $SQL_project;
     if($result_project = mysqli_query($conn,$SQL_project)):
         echo "<script>
-        alert('Projeto cadastrado com sucesso!'); location= '../pages/projetos_create.php';
+        alert('Projeto cadastrado com sucesso!'); location= '../pages/projetos.php';
         </script>";
     else:
         echo "error";

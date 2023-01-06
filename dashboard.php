@@ -56,6 +56,13 @@ if ($result->num_rows > 0) {
     }
 }
 
+$SQL_Select_Tarefa = "SELECT t.id, t.cd_user, t.name_task, t.priority, t.status_task, t.created_at, t.dt_expired, t.designado_por, u.profile_img, u.nome FROM tb_task AS t INNER JOIN usuarios AS u ON t.cd_user = u.id WHERE cd_user = $id ORDER BY priority ASC";
+$t = 0;
+$result_tarefas = $conn->query($SQL_Select_Tarefa);
+while ($row = $result_tarefas->fetch_assoc()){
+    $t++;
+}
+
 
 TODO: //google search API 'https://google-search3.p.rapidapi.com/api/v1/search/q=elon+musk'
 
@@ -100,8 +107,8 @@ TODO: //google search API 'https://google-search3.p.rapidapi.com/api/v1/search/q
                         Home</a>
                 </li>
                 <li>
-                    <a href="dash/pages/noticias.php" target="myFrame" data-toggle="tooltip" data-placement="right" title="Notícias de agora"><span class="fa-solid fa-newspaper mr-3 notif" ><small
-                                class="d-flex align-items-center justify-content-center">!</small></span>Noícias</a>
+                    <a href="dash/pages/noticias.php" target="myFrame" data-toggle="tooltip" data-placement="right" title="Notícias de agora"><span class="fa-solid fa-newspaper mr-3 notif" >
+                        <small class="d-flex align-items-center justify-content-center">!</small></span>Notícias</a>
                 </li>
                 <?php
                     if ($_SESSION["nivel"] == 3) {
@@ -113,8 +120,11 @@ TODO: //google search API 'https://google-search3.p.rapidapi.com/api/v1/search/q
                     }
                 ?>
                 <li>
-                    <a href="dash/pages/tarefas.php" data-toggle="tooltip" data-placement="right" title="Você tem 7 tarefas" target="myFrame"><span class="fa-solid fa-list-check mr-3 notif"><small
-                                class="d-flex align-items-center justify-content-center">7</small></span>Tarefas</a>
+                    <a href="dash/pages/tarefas.php" data-toggle="tooltip" data-placement="right" title="Você tem 7 tarefas" target="myFrame"><span class="fa-solid fa-list-check mr-3 notif">
+                    <?php if(!empty($t)): ?>    
+                    <small class="d-flex align-items-center justify-content-center"><?= $t;?></small>
+                    <?php endif;?>
+                    </span>Tarefas</a>
                 </li>
                 <?php
                     if ($_SESSION["nivel"] == 3) {
@@ -173,7 +183,7 @@ TODO: //google search API 'https://google-search3.p.rapidapi.com/api/v1/search/q
                     <a href="dash/pages/info.php" id="myFrame" target="myFrame"><span class="fa-solid fa-circle-info mr-3"></span> Informações</a>
                 </li>
                 <li>
-                    <a href="?loggout" class="loggout" onclick="return sair()"><span class="fa fa-sign-out mr-3"></span> Sair</a>
+                    <a href="?loggout" class="loggout"><span class="fa fa-sign-out mr-3"></span> Sair</a>
                 </li>
             </ul>
 
@@ -211,17 +221,12 @@ TODO: //google search API 'https://google-search3.p.rapidapi.com/api/v1/search/q
         parent.scroll(0, 0);
     }
 
-    var convidado = document.getElementById('convidado').value;
-    if (convidado != "") {
-        alert('Saindo');
-    }     
-    </script>
-    <script>
-    // Tooltip menu 
-    $(function () {
+        // Tooltip menu 
+        $(function () {
         $('[data-toggle="tooltip"]').tooltip()
-    })
+    });
     </script>
+
 </body>
 
 </html>

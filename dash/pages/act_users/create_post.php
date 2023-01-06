@@ -44,7 +44,9 @@ if (isset($_POST["sendPost"]) && $_POST["sendPost"] != null) {
    $texto = $_POST["textarea"];
    $destaque = $_POST["destaque"];
 
-   
+   //echo $title . " " . $category . " " . $texto . " " . $destaque;
+
+
    if(isset($_FILES['file'])):
         $extensao = strtolower(substr($_FILES['file']['name'], -4)); // Pega nome da extensao do arquivo
         $nome_imagem = md5(time()) . $extensao; // define nome para o arquivo
@@ -55,18 +57,17 @@ if (isset($_POST["sendPost"]) && $_POST["sendPost"] != null) {
         $path_copy_destine = $thumb.$nome_imagem;	
         
         if (!file_exists($fullPath_image)) {
-            //echo "entrou no if";
-           move_uploaded_file($_FILES['file']['tmp_name'], $diretorio.$nome_imagem); // efetua o upload
-            
+            move_uploaded_file($_FILES['file']['tmp_name'], $diretorio.$nome_imagem);
+
            if (file_exists($fullPath_image)) {
-               copy($fullPath_image, $path_copy_destine);
+                copy($fullPath_image, $path_copy_destine);
            }
         }
         
     endif;
 
    //echo "titulo: $title, categoria: $category, texto: $texto";
-   
+
     if (empty($last_id)) {
         $id = 1;
     }else{
@@ -92,11 +93,11 @@ if (isset($_POST["sendPost"]) && $_POST["sendPost"] != null) {
         '".$destaque."',
         '".$data_atual."'          
     )";
-    // echo $SQL_Insert_Post;
+    //echo $SQL_Insert_Post;
     // exit;
     if($result_Insert_Post = mysqli_query($conn,$SQL_Insert_Post)):
         echo "<script>
-        alert('Post cadastrado com sucesso!'); location= '../post_blog.php';
+        alert('Post cadastrado com sucesso!'); location= '../list_posts.php';
         </script>";
     else:
         echo "error";
