@@ -70,7 +70,7 @@ senha: roboto123
 
 Pode cadastrar o que quiser, não se preocupe ao efetuar o logout ou ao expirar a sessão todos os registros efetuados serão deletados automáticamente.
 
-> Intranet Online -> [Acessar](http://phpintranet.infinityfreeapp.com/)
+> Intranet Online -> [Acessar](https://phpintranet.infinityfreeapp.com/)
 
 ## Acompanhe também o resultado parcial deste projeto  no Youtube
 > Projeto Intranet -> [Ver no youtube](https://www.youtube.com/watch?v=SSyommgWNSE&ab_channel=WilliamKyodev)
